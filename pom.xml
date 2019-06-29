@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>scalafix-maven-plugin</name>
+    <description>
+        scalafix-maven-plugin enables automatic refactoring and linting of Maven projects written in Scala using
+        Scalafix.
+    </description>
+    <url>https://github.com/evis/scalafix-maven-plugin</url>
+    <groupId>io.github.evis</groupId>
+    <artifactId>scalafix-maven-plugin</artifactId>
+    <version>0.1.0_0.9.5</version>
+    <licenses>
+        <license>
+            <name>BSD-3-Clause</name>
+            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Evgeny Veretennikov</name>
+            <email>evg.veretennikov@gmail.com</email>
+            <url>https://github.com/evis</url>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/evis/scalafix-maven-plugin.git</connection>
+        <developerConnection>scm:git:ssh://github.com:evis/scalafix-maven-plugin.git</developerConnection>
+        <url>http://github.com/evis/scalafix-maven-plugin/tree/master</url>
+    </scm>
+    <properties>
+        <maven-plugin.version>3.6.0</maven-plugin.version>
+        <scalafix.version>0.9.5</scalafix.version>
+        <scala.version>2.12.8</scala.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <scala-maven-plugin.version>4.0.1</scala-maven-plugin.version>
+        <!-- java 8 is required for static interface
+             Scalafix.classloaderInstance() call -->
+        <java.version>8</java.version>
+    </properties>
+    <packaging>maven-plugin</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${scala-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>${maven-plugin.version}</version>
+                <!-- tell plugin where to look for mojo annotations to avoid
+                     strange ArrayIndexOutOfBoundsException on building plugin.
+                     source: https://stackoverflow.com/a/47043146/5053865 -->
+                <configuration>
+                    <mojoDependencies>
+                        <param>io.github.evis:scalafix-maven-plugin</param>
+                    </mojoDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.epfl.scala</groupId>
+            <artifactId>scalafix-interfaces</artifactId>
+            <version>${scalafix.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.epfl.scala</groupId>
+            <artifactId>scalafix-cli_${scala.version}</artifactId>
+            <version>${scalafix.version}</version>
+        </dependency>
+    </dependencies>
+</project>
