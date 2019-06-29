@@ -94,13 +94,13 @@ Also, you can pass parameters via `pom.xml`:
 
 ### Plugin parameters
 
-CLI name | Maven configuration name | Type | Default | Description
---- | --- | --- | --- | ---
-`scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` | `IN_PLACE` | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.9.5/scalafix/interfaces/ScalafixMainMode.html).
-`scalafix.command.line.args` | `commandLineArgs` | `String` | empty string | Custom CLI arguments to pass into Scalafix. Description of available arguments can be found in [Scalafix CLI documentation](https://scalacenter.github.io/scalafix/docs/users/installation.html#help).
-`scalafix.skip` | `skip` | `Boolean` | `false` | Whether we should skip all formatting.
-`scalafix.skip.main` | `skipMain` | `Boolean` | `false` | Whether we should skip formatting of application/library sources (by default located in `main/scala`).
-`scalafix.skip.test` | `skipTest` | `Boolean` | `false` | Whether we should skip formatting of test sources (by default located in `/test/scala`).
+CLI name | Maven configuration name | Type | Description
+--- | --- | --- | ---
+`scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` (default: `IN_PLACE`) | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.9.5/scalafix/interfaces/ScalafixMainMode.html).
+`scalafix.command.line.args` | `commandLineArgs` | `String` (default: empty string) | Custom CLI arguments to pass into Scalafix. Description of available arguments can be found in [Scalafix CLI documentation](https://scalacenter.github.io/scalafix/docs/users/installation.html#help).
+`scalafix.skip` | `skip` | `Boolean` (default: `false`) | Whether we should skip all formatting.
+`scalafix.skip.main` | `skipMain` | `Boolean` (default: `false`) | Whether we should skip formatting of application/library sources (by default located in `main/scala`).
+`scalafix.skip.test` | `skipTest` | `Boolean` (default: `false`) | Whether we should skip formatting of test sources (by default located in `/test/scala`).
 
 ### Tips and tricks
 
