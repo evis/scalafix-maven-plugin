@@ -101,6 +101,7 @@ CLI name | Maven configuration name | Type | Description
 `scalafix.skip` | `skip` | `Boolean` (default: `false`) | Whether we should skip all formatting.
 `scalafix.skip.main` | `skipMain` | `Boolean` (default: `false`) | Whether we should skip formatting of application/library sources (by default located in `main/scala`).
 `scalafix.skip.test` | `skipTest` | `Boolean` (default: `false`) | Whether we should skip formatting of test sources (by default located in `/test/scala`).
+`scalafix.config` | `config` | `File` (default: `.scalafix.conf`) | Configuration with rules to invoke for Scalafix.
 
 ### Tips and tricks
 
@@ -145,6 +146,13 @@ mvn clean compile test-compile scalafix:scalafix -Psemanticdb
 ```
 
 So, when you run compilation with profile turned off, then SemanticDB compiler plugin doesn't affect compilation time at all.
+
+6. Sometimes it makes sense to make different requirements about main and test code quality. To achieve it you can make separate test config, and invoke plugin twice, e.g.:
+
+```bash
+mvn clean compile scalafix:scalafix # this invocation uses .scalafix.conf
+mvn test-compile scalafix:scalafix -Dscalafix.config=.scalafix.test.conf # means that rules for test code are located in file .scalafix.test.conf
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please [open an issue](https://github.com/evis/scalafix-maven-plugin/issues/new) first to discuss what you would like to change.

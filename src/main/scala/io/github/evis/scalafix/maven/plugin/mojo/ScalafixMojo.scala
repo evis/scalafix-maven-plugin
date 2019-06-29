@@ -1,5 +1,7 @@
 package io.github.evis.scalafix.maven.plugin.mojo
 
+import java.io.File
+
 import io.github.evis.scalafix.maven.plugin.params._
 import org.apache.maven.artifact.Artifact
 import org.apache.maven.model.Plugin
@@ -74,6 +76,9 @@ final class ScalafixMojo extends AbstractMojo {
   @Parameter(property = "scalafix.skip.test", defaultValue = "false")
   private var skipTest: Boolean = _
 
+  @Parameter(property = "scalafix.config")
+  private var config: File = _
+
   override def execute(): Unit = {
     if (skip) {
       getLog.info("Skip scalafix since skip flag passed")
@@ -90,6 +95,7 @@ final class ScalafixMojo extends AbstractMojo {
           CompiledDirectoryParam(testCompiledDirectory),
           PluginsParam(plugins),
           ModeParam(mode),
+          ConfigParam(config),
           CommandLineArgsParam(commandLineArgs)
         )
       run(this, params)
