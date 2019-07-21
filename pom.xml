@@ -33,6 +33,7 @@
     <properties>
         <maven-plugin.version>3.6.0</maven-plugin.version>
         <scalafix.version>0.9.5</scalafix.version>
+        <scala.major.version>2.12</scala.major.version>
         <scala.version>2.12.8</scala.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <scala-maven-plugin.version>4.0.1</scala-maven-plugin.version>
@@ -43,6 +44,7 @@
         <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <scalatest.version>3.0.8</scalatest.version>
     </properties>
     <packaging>maven-plugin</packaging>
     <build>
@@ -160,6 +162,11 @@
             <groupId>ch.epfl.scala</groupId>
             <artifactId>scalafix-cli_${scala.version}</artifactId>
             <version>${scalafix.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.major.version}</artifactId>
+            <version>${scalatest.version}</version>
         </dependency>
     </dependencies>
 </project>
