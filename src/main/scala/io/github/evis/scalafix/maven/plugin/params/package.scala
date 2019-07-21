@@ -11,4 +11,11 @@ package object params {
   }
 
   type MojoParams = List[MojoParam]
+
+  implicit class MojoParamsOps(private val params: MojoParams) {
+
+    def applied: ScalafixArgumentsBuilder =
+      params.foldLeft(ScalafixArgumentsBuilder())(_.patch(_))
+  }
+
 }

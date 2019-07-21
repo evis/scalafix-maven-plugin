@@ -1,8 +1,7 @@
 package io.github.evis.scalafix.maven.plugin.phases
 
 import io.github.evis.scalafix.maven.plugin.ScalafixArgumentsBuildError.EmptyPaths
-import io.github.evis.scalafix.maven.plugin.ScalafixArgumentsBuilder
-import io.github.evis.scalafix.maven.plugin.params.MojoParams
+import io.github.evis.scalafix.maven.plugin.params._
 import scalafix.interfaces.Scalafix
 
 trait BuildScalafixArguments {
@@ -11,7 +10,7 @@ trait BuildScalafixArguments {
       scalafix: Scalafix,
       params: MojoParams
   ): ScalafixArgumentsBuildResult = {
-    val builder = params.foldLeft(ScalafixArgumentsBuilder())(_.patch(_))
+    val builder = params.applied
     // When paths aren't given, Scalafix runs on full given sourceroot, or just
     // on current directory (`.`) if sourceroot isn't given too. That's not
     // what we want most of the time. For example, parent Maven project may
