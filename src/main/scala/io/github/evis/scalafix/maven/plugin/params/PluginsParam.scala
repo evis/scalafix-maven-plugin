@@ -13,7 +13,7 @@ object PluginsParam {
       plugins.findScalaPlugin.flatMap(config).toList.flatMap(compilerArgs))
   }
 
-  private implicit class PluginsOps(private val plugins: java.util.List[Plugin])
+  implicit private class PluginsOps(private val plugins: java.util.List[Plugin])
       extends AnyVal {
 
     def findScalaPlugin: Option[Plugin] = {

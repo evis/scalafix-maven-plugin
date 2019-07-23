@@ -6,6 +6,8 @@ class CommandLineArgsParamSpec extends ParamSpec {
     val args = new java.util.ArrayList[String]()
     args.add("--syntactic")
     args.add("--verbose")
-    CommandLineArgsParam(args).applied.parsedArguments shouldBe List("--syntactic", "--verbose")
+    CommandLineArgsParam(args).applied.parsedArguments shouldBe List(
+      "--syntactic",
+      "--verbose")
   }
 }

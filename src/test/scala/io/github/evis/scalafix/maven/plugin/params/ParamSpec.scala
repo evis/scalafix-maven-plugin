@@ -6,7 +6,8 @@ trait ParamSpec extends BaseSpec {
 
   implicit class MojoParamOps(private val param: MojoParam) {
 
-    def applied: ScalafixArgumentsBuilder = ScalafixArgumentsBuilder().patch(param)
+    def applied: ScalafixArgumentsBuilder =
+      ScalafixArgumentsBuilder().patch(param)
   }
 
 }

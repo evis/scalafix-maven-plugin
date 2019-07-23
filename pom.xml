@@ -46,9 +46,14 @@
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <scalatest.version>3.0.8</scalatest.version>
         <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
+        <scalafmt.version>1.5.1</scalafmt.version>
+        <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
     </properties>
     <packaging>maven-plugin</packaging>
     <build>
+        <!-- Needed for scalafmt plugin. PR with fix: https://github.com/SimonJPegg/mvn_scalafmt/pull/35 -->
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -153,6 +158,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.antipathy</groupId>
+                <artifactId>mvn-scalafmt_${scala.major.version}</artifactId>
+                <version>${mvn-scalafmt.version}_${scalafmt.version}</version>
             </plugin>
         </plugins>
     </build>

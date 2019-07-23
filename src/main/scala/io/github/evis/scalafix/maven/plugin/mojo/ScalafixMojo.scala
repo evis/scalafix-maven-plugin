@@ -16,49 +16,46 @@ import scalafix.interfaces.ScalafixMainMode
 @Mojo(name = "scalafix", requiresDependencyResolution = ResolutionScope.TEST)
 final class ScalafixMojo extends AbstractMojo {
 
+  // If java source directory exists in project, then
+  // project.build.sourceDirectory points to it. So, we go to ../scala for
+  // Scala sources. scala-maven-plugin does the same.
+  // (keep one empty line after comment to avoid removal of the comment by
+  // scalafix)
+
   @Parameter(
-    // If java source directory exists in project, then
-    // project.build.sourceDirectory points to it. So, we go to ../scala for
-    // Scala sources. scala-maven-plugin does the same.
     defaultValue = "${project.build.sourceDirectory}/../scala",
     required = true,
-    readonly = true
-  )
+    readonly = true)
   private var sourceDirectory: String = _
 
   @Parameter(
     defaultValue = "${project.build.testSourceDirectory}/../scala",
     required = true,
-    readonly = true
-  )
+    readonly = true)
   private var testSourceDirectory: String = _
 
   @Parameter(
     defaultValue = "${project.artifacts}",
     required = true,
-    readonly = true
-  )
+    readonly = true)
   private var projectDependencies: java.util.Set[Artifact] = _
 
   @Parameter(
     defaultValue = "${project.build.outputDirectory}",
     required = true,
-    readonly = true
-  )
+    readonly = true)
   private var compiledDirectory: String = _
 
   @Parameter(
     defaultValue = "${project.build.testOutputDirectory}",
     required = true,
-    readonly = true
-  )
+    readonly = true)
   private var testCompiledDirectory: String = _
 
   @Parameter(
     defaultValue = "${project.build.plugins}",
     required = true,
-    readonly = true
-  )
+    readonly = true)
   private var plugins: java.util.List[Plugin] = _
 
   @Parameter(property = "scalafix.mode", defaultValue = "IN_PLACE")

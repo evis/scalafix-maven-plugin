@@ -16,6 +16,8 @@ class CompiledDirectoryParamSpec extends ParamSpec {
         CompiledDirectoryParam("src/main/scala"),
         CompiledDirectoryParam("src/test/scala")
       ).applied.classpath.map(_.toString)
-    result should contain theSameElementsAs List("src/main/scala", "src/test/scala")
+    result should contain theSameElementsAs List(
+      "src/main/scala",
+      "src/test/scala")
   }
 }

@@ -11,7 +11,13 @@ class BuildScalafixArgumentsSpec extends BaseSpec with BuildScalafixArguments {
     val scalafix = new ScalafixImpl
     val params = List(SourceDirectoryParam("src/main/scala"))
     val arguments = buildScalafixArguments(scalafix, params).right.value
-    arguments.asInstanceOf[ScalafixArgumentsImpl].args.files.loneElement.toRelative.toString shouldBe "src/main/scala"
+    arguments
+      .asInstanceOf[ScalafixArgumentsImpl]
+      .args
+      .files
+      .loneElement
+      .toRelative
+      .toString shouldBe "src/main/scala"
   }
 
   it should "not build if source directory doesn't exist" in {
