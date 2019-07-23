@@ -9,10 +9,10 @@ trait Run
     with LogScalafixArguments
     with ShowErrors {
 
-  def run(logger: Log, params: MojoParams): Unit = {
+  def run(params: MojoParams, logger: Log): Unit = {
     val scalafix = loadScalafix()
     val arguments = buildScalafixArguments(scalafix, params)
-    log(logger, arguments)
+    logger.log(arguments)
     val errors = arguments.map(_.run().toList).getOrElse(Nil)
     showErrors(errors)
   }
