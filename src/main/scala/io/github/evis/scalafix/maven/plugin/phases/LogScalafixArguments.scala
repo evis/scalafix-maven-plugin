@@ -1,10 +1,10 @@
 package io.github.evis.scalafix.maven.plugin.phases
 
-import org.apache.maven.plugin.Mojo
+import org.apache.maven.plugin.logging.Log
 
 trait LogScalafixArguments {
 
-  def log(mojo: Mojo, arguments: ScalafixArgumentsBuildResult): Unit = {
-    mojo.getLog.debug(s"arguments = $arguments")
+  def log(logger: Log, arguments: ScalafixArgumentsBuildResult): Unit = {
+    logger.debug(s"arguments = $arguments")
   }
 }

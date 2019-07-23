@@ -1,7 +1,7 @@
 package io.github.evis.scalafix.maven.plugin.phases
 
 import io.github.evis.scalafix.maven.plugin.params.MojoParams
-import org.apache.maven.plugin.Mojo
+import org.apache.maven.plugin.logging.Log
 
 trait Run
     extends LoadScalafix
@@ -9,10 +9,10 @@ trait Run
     with LogScalafixArguments
     with ShowErrors {
 
-  def run(mojo: Mojo, params: MojoParams): Unit = {
+  def run(logger: Log, params: MojoParams): Unit = {
     val scalafix = loadScalafix()
     val arguments = buildScalafixArguments(scalafix, params)
-    log(mojo, arguments)
+    log(logger, arguments)
     val errors = arguments.map(_.run().toList).getOrElse(Nil)
     showErrors(errors)
   }

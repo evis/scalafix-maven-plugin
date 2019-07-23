@@ -98,7 +98,7 @@ final class ScalafixMojo extends AbstractMojo {
           ConfigParam(config),
           CommandLineArgsParam(commandLineArgs)
         )
-      run(this, params)
+      run(getLog, params)
     }
   }
 }
