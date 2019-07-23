@@ -14,6 +14,6 @@ trait Run
     val arguments = buildScalafixArguments(scalafix, params)
     log(mojo, arguments)
     val errors = arguments.map(_.run().toList).getOrElse(Nil)
-    showErrors(mojo, errors)
+    showErrors(errors)
   }
 }
