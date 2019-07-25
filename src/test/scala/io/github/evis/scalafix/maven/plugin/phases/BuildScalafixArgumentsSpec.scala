@@ -5,6 +5,7 @@ import io.github.evis.scalafix.maven.plugin.ScalafixArgumentsBuildError.EmptyPat
 import io.github.evis.scalafix.maven.plugin.params.SourceDirectoryParam
 import scalafix.internal.interfaces.{ScalafixArgumentsImpl, ScalafixImpl}
 
+@SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
 class BuildScalafixArgumentsSpec extends BaseSpec with BuildScalafixArguments {
 
   "buildScalafixArguments()" should "build if source directory is given" in {

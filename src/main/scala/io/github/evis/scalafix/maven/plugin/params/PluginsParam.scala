@@ -23,6 +23,7 @@ object PluginsParam {
     }
   }
 
+  @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
   private def config(plugin: Plugin): Option[Xpp3Dom] = {
     Try(Some(plugin.getConfiguration.asInstanceOf[Xpp3Dom])).getOrElse(None)
   }

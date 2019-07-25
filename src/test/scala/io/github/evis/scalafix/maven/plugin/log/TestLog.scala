@@ -42,6 +42,7 @@ class TestLog(level: LogLevel) extends Log {
 
   override def error(e: Throwable): Unit = add(Error, e)
 
+  @SuppressWarnings(Array("scalafix:DisableSyntax.var"))
   private var log = Queue.empty[LogMessage]
 
   private def add(level: LogLevel, s: CharSequence): Unit =

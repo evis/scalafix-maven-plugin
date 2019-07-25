@@ -14,6 +14,7 @@ import scalafix.interfaces.ScalafixMainMode
 // in ProjectDependenciesParam.
 // Test dependency scope should include all dependencies from compile scope.
 @Mojo(name = "scalafix", requiresDependencyResolution = ResolutionScope.TEST)
+@SuppressWarnings(Array("scalafix:DisableSyntax.var"))
 final class ScalafixMojo extends AbstractMojo {
 
   // If java source directory exists in project, then

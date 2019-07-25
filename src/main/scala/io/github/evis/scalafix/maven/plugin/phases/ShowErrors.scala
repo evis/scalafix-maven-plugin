@@ -5,6 +5,7 @@ import scalafix.interfaces.ScalafixError
 
 trait ShowErrors {
 
+  @SuppressWarnings(Array("scalafix:DisableSyntax.throw"))
   def showErrors(errors: List[ScalafixError]): Unit = {
     if (errors.nonEmpty) {
       throw new MojoExecutionException(

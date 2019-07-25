@@ -2,6 +2,7 @@ package io.github.evis.scalafix.maven.plugin.phases
 
 import io.github.evis.scalafix.maven.plugin.BaseSpec
 
+@SuppressWarnings(Array("scalafix:DisableSyntax.null"))
 class LoadScalafixSpec extends BaseSpec with LoadScalafix {
 
   "loadScalafix()" should "not throw" in {

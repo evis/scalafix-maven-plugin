@@ -48,6 +48,7 @@
         <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
         <scalafmt.version>1.5.1</scalafmt.version>
         <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
+        <semanticdb.version>4.2.0</semanticdb.version>
     </properties>
     <packaging>maven-plugin</packaging>
     <build>
@@ -68,6 +69,19 @@
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>${scala-maven-plugin.version}</version>
+                <configuration>
+                    <args>
+                        <arg>-Ywarn-adapted-args</arg>
+                        <arg>-Ywarn-unused</arg>
+                    </args>
+                    <compilerPlugins>
+                        <compilerPlugin>
+                            <groupId>org.scalameta</groupId>
+                            <artifactId>semanticdb-scalac_${scala.version}</artifactId>
+                            <version>${semanticdb.version}</version>
+                        </compilerPlugin>
+                    </compilerPlugins>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -163,6 +177,11 @@
                 <groupId>org.antipathy</groupId>
                 <artifactId>mvn-scalafmt_${scala.major.version}</artifactId>
                 <version>${mvn-scalafmt.version}_${scalafmt.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>io.github.evis</groupId>
+                <artifactId>scalafix-maven-plugin</artifactId>
+                <version>${version}</version>
             </plugin>
         </plugins>
     </build>
