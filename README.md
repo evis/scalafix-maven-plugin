@@ -92,6 +92,23 @@ Also, you can pass parameters via `pom.xml`:
 </plugins>
 ```
 
+If you want to use external rules, add jars containing rules to dependencies of the plugin:
+
+```xml
+<plugin>
+    <groupId>io.github.evis</groupId>
+    <artifactId>scalafix-maven-plugin</artifactId>
+    <version>0.1.1_0.9.5</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.nequissimus</groupId>
+            <artifactId>sort-imports_2.12</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+    </dependencies>
+</plugin>
+```
+
 ### Plugin parameters
 
 CLI name | Maven configuration name | Type | Description
