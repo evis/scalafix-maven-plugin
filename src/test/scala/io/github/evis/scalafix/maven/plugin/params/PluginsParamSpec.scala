@@ -16,7 +16,8 @@ class PluginsParamSpec extends BaseSpec {
     sp.setArtifactId("scala-maven-plugin")
     if (args.nonEmpty) {
       val argsLine = args.mkString("<arg>", "</arg><arg>", "</arg>")
-      val configurationString = s"""<configuration><args>$argsLine</args></configuration>"""
+      val configurationString =
+        s"""<configuration><args>$argsLine</args></configuration>"""
       sp.setConfiguration(
         Xpp3DomBuilder.build(new StringReader(configurationString))
       )
@@ -25,13 +26,15 @@ class PluginsParamSpec extends BaseSpec {
   }
 
   "PluginsParam" should "return scalacOptions if they exist" in {
-    PluginsParam(List(scalaPlugin("-Xlint" :: "-Ypartial-unification" :: Nil)).asJava)(ScalafixArgumentsBuilder())
-      .scalacOptions shouldBe List("-Xlint", "-Ypartial-unification")
+    PluginsParam(
+      List(scalaPlugin("-Xlint" :: "-Ypartial-unification" :: Nil)).asJava)(
+      ScalafixArgumentsBuilder()).scalacOptions shouldBe List(
+      "-Xlint",
+      "-Ypartial-unification")
   }
 
   it should "return no scalacOptions if they are not set" in {
-    PluginsParam(List(scalaPlugin(Nil)).asJava)(ScalafixArgumentsBuilder())
-      .scalacOptions shouldBe Nil
+    PluginsParam(List(scalaPlugin(Nil)).asJava)(ScalafixArgumentsBuilder()).scalacOptions shouldBe Nil
   }
 
 }
