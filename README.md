@@ -11,12 +11,12 @@ Add plugin into `plugins` node of `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin</artifactId>
-        <version>0.1.1_0.9.5</version>
+        <version>0.1.2_0.9.5</version>
     </plugin>
 </plugins>
 ```
 
-Where `0.1.1` is version of plugin itself, and `0.9.5` is version of Scalafix invoked by plugin.
+Where `0.1.2` is version of plugin itself, and `0.9.5` is version of Scalafix invoked by plugin.
 
 Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project. You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
@@ -83,7 +83,7 @@ Also, you can pass parameters via `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin</artifactId>
-        <version>0.1.1_0.9.5</version>
+        <version>0.1.2_0.9.5</version>
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
@@ -98,7 +98,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.1_0.9.5</version>
+    <version>0.1.2_0.9.5</version>
     <dependencies>
         <dependency>
             <groupId>com.nequissimus</groupId>
