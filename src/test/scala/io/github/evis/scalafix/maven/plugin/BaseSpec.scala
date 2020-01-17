@@ -2,14 +2,14 @@ package io.github.evis.scalafix.maven.plugin
 
 import org.scalatest.{
   EitherValues,
-  FlatSpec,
   LoneElement,
-  Matchers,
   OptionValues
 }
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 trait BaseSpec
-    extends FlatSpec
+    extends AnyFlatSpec
     with Matchers
     with LoneElement
     with OptionValues
