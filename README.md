@@ -11,12 +11,12 @@ Add plugin into `plugins` node of `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin</artifactId>
-        <version>0.1.2_0.9.5</version>
+        <version>0.1.2_0.9.11</version>
     </plugin>
 </plugins>
 ```
 
-Where `0.1.2` is version of plugin itself, and `0.9.5` is version of Scalafix invoked by plugin.
+Where `0.1.2` is version of plugin itself, and `0.9.11` is version of Scalafix invoked by plugin.
 
 Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project. You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
@@ -83,7 +83,7 @@ Also, you can pass parameters via `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin</artifactId>
-        <version>0.1.2_0.9.5</version>
+        <version>0.1.2_0.9.11</version>
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
@@ -98,7 +98,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.2_0.9.5</version>
+    <version>0.1.2_0.9.11</version>
     <dependencies>
         <dependency>
             <groupId>com.nequissimus</groupId>
@@ -113,7 +113,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 
 CLI name | Maven configuration name | Type | Description
 --- | --- | --- | ---
-`scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` (default: `IN_PLACE`) | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.9.5/scalafix/interfaces/ScalafixMainMode.html).
+`scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` (default: `IN_PLACE`) | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.9.11/scalafix/interfaces/ScalafixMainMode.html).
 `scalafix.command.line.args` | `commandLineArgs` | `String` (default: empty string) | Custom CLI arguments to pass into Scalafix. Description of available arguments can be found in [Scalafix CLI documentation](https://scalacenter.github.io/scalafix/docs/users/installation.html#help).
 `scalafix.skip` | `skip` | `Boolean` (default: `false`) | Whether we should skip all formatting.
 `scalafix.skip.main` | `skipMain` | `Boolean` (default: `false`) | Whether we should skip formatting of application/library sources (by default located in `main/scala`).
