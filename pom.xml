@@ -11,7 +11,7 @@
     <url>https://github.com/evis/scalafix-maven-plugin</url>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.2_0.9.5</version>
+    <version>0.1.2_${scalafix.version}</version>
     <licenses>
         <license>
             <name>BSD-3-Clause</name>
@@ -32,23 +32,22 @@
     </scm>
     <properties>
         <maven-plugin.version>3.6.0</maven-plugin.version>
-        <scalafix.version>0.9.5</scalafix.version>
+        <scalafix.version>0.9.11</scalafix.version>
         <scala.major.version>2.12</scala.major.version>
-        <scala.version>2.12.8</scala.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <scala-maven-plugin.version>4.0.1</scala-maven-plugin.version>
+        <scala.version>2.12.10</scala.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <scala-maven-plugin.version>4.3.0</scala-maven-plugin.version>
         <!-- java 8 is required for static interface
              Scalafix.classloaderInstance() call -->
         <java.version>8</java.version>
-        <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <scalatest.version>3.0.8</scalatest.version>
+        <scalatest.version>3.1.0</scalatest.version>
         <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
-        <scalafmt.version>1.5.1</scalafmt.version>
-        <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
-        <semanticdb.version>4.2.0</semanticdb.version>
+        <mvn-scalafmt.version>1.0.2</mvn-scalafmt.version>
+        <semanticdb.version>4.3.0</semanticdb.version>
     </properties>
     <packaging>maven-plugin</packaging>
     <build>
@@ -73,6 +72,7 @@
                     <args>
                         <arg>-Ywarn-adapted-args</arg>
                         <arg>-Ywarn-unused</arg>
+                        <arg>-deprecation</arg>
                     </args>
                     <compilerPlugins>
                         <compilerPlugin>
@@ -176,12 +176,15 @@
             <plugin>
                 <groupId>org.antipathy</groupId>
                 <artifactId>mvn-scalafmt_${scala.major.version}</artifactId>
-                <version>${mvn-scalafmt.version}_${scalafmt.version}</version>
+                <version>${mvn-scalafmt.version}</version>
+                <configuration>
+                    <configLocation>${project.basedir}/.scalafmt.conf</configLocation>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>io.github.evis</groupId>
                 <artifactId>scalafix-maven-plugin</artifactId>
-                <version>${version}</version>
+                <version>0.1.2_0.9.5</version>
             </plugin>
         </plugins>
     </build>

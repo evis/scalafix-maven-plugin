@@ -29,11 +29,17 @@ final class ScalafixMojo extends AbstractMojo {
     readonly = true)
   private var sourceDirectory: String = _
 
+  @Parameter(required = false)
+  private var sourceDirectories: java.util.List[String] = _
+
   @Parameter(
     defaultValue = "${project.build.testSourceDirectory}/../scala",
     required = true,
     readonly = true)
   private var testSourceDirectory: String = _
+
+  @Parameter(required = false)
+  private var testSourceDirectories: java.util.List[String] = _
 
   @Parameter(
     defaultValue = "${project.artifacts}",
@@ -86,8 +92,10 @@ final class ScalafixMojo extends AbstractMojo {
     } else {
       val params =
         List(
-          SourceDirectoryParam(sourceDirectory).ifNot(skipMain),
-          SourceDirectoryParam(testSourceDirectory).ifNot(skipTest),
+          SourceDirectoryParam(sourceDirectory, sourceDirectories).ifNot(
+            skipMain),
+          SourceDirectoryParam(testSourceDirectory, testSourceDirectories)
+            .ifNot(skipTest),
           ProjectDependenciesParam(projectDependencies),
           CompiledDirectoryParam(compiledDirectory),
           CompiledDirectoryParam(testCompiledDirectory),
