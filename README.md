@@ -87,6 +87,10 @@ Also, you can pass parameters via `pom.xml`:
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
+            <sourceDirectories>
+                <param>src/main/scala-2.13+</param>
+                <param>src/main/scala-2.13-</param>
+            </sourceDirectories>
         </configuration>
     </plugin>
 </plugins>
@@ -113,6 +117,10 @@ If you want to use external rules, add jars containing rules to dependencies of 
 
 CLI name | Maven configuration name | Type | Description
 --- | --- | --- | ---
+`scalafix.sourceDirectory` | `sourceDirectory` | `String` (default: `${project.build.sourceDirectory}/../scala"`) | Scala source directory.
+`scalafix.sourceDirectories` | `sourceDirectories` | `java.util.List[String]` | Additional scala source directories.
+`scalafix.testSourceDirectory` | `testSourceDirectory` | `String` (default: `${project.build.testSourceDirectory}/../scala"`) | Scala test source directory.
+`scalafix.testSourceDirectories` | `testSourceDirectories` | `java.util.List[String]` | Additional scala test source directories.
 `scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` (default: `IN_PLACE`) | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.9.11/scalafix/interfaces/ScalafixMainMode.html).
 `scalafix.command.line.args` | `commandLineArgs` | `String` (default: empty string) | Custom CLI arguments to pass into Scalafix. Description of available arguments can be found in [Scalafix CLI documentation](https://scalacenter.github.io/scalafix/docs/users/installation.html#help).
 `scalafix.skip` | `skip` | `Boolean` (default: `false`) | Whether we should skip all formatting.

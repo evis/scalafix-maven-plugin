@@ -1,8 +1,22 @@
 package io.github.evis.scalafix.maven.plugin.params
 
 import java.nio.file.Paths
+import scala.collection.JavaConverters._
 
 object SourceDirectoryParam {
+
+  def apply(
+      sourceDirectory: String,
+      sourceDirectories: java.util.List[String]): MojoParam = {
+    val dirs = Option(sourceDirectories).map(_.asScala).getOrElse(Nil)
+
+    val paths = (sourceDirectory +: dirs.toList)
+      .map(getCanonicalPath)
+      .distinct
+      .filter(_.toFile.exists)
+
+    _.withPaths(paths)
+  }
 
   def apply(sourceDirectory: String): MojoParam = {
     _.withPaths(List(getCanonicalPath(sourceDirectory)).filter(_.toFile.exists))
