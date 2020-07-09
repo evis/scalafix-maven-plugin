@@ -7,6 +7,10 @@ import scala.collection.JavaConverters._
 import scala.util.Try
 
 object PluginsParam {
+  val scalaPluginOrgs = Set(
+    "net.alchim31.maven",
+    "com.triplequote.maven"
+  )
 
   def apply(plugins: java.util.List[Plugin]): MojoParam = {
     _.withScalacOptions(
@@ -18,7 +22,7 @@ object PluginsParam {
 
     def findScalaPlugin: Option[Plugin] = {
       plugins.asScala.find { plugin =>
-        plugin.getGroupId == "net.alchim31.maven" && plugin.getArtifactId == "scala-maven-plugin"
+        scalaPluginOrgs.contains(plugin.getGroupId) && plugin.getArtifactId == "scala-maven-plugin"
       }
     }
   }
