@@ -11,7 +11,7 @@
     <url>https://github.com/evis/scalafix-maven-plugin</url>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.2_0.9.5</version>
+    <version>0.1.3_0.9.5</version>
     <licenses>
         <license>
             <name>BSD-3-Clause</name>
