@@ -7,6 +7,7 @@ import scala.collection.JavaConverters._
 import scala.util.Try
 
 object PluginsParam {
+
   val scalaPluginOrgs = Set(
     "net.alchim31.maven",
     "com.triplequote.maven"
