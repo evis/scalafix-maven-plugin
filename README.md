@@ -18,7 +18,7 @@ Add plugin into `plugins` node of `pom.xml`:
 
 Where `0.1.3` is version of plugin itself, and `0.9.5` is version of Scalafix invoked by plugin.
 
-Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project. You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
+Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project (note the dot at the start of filename). You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
 In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable SemanticDB compiler plugin too:
 
@@ -51,6 +51,19 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
 ```
 
 You don't need to care about passing Scala version and Scalac options to this plugin specifically. Plugin finds them automatically from your build info.
+
+By default, sources should be located inside `src/main/scala` directory. Though, you may change it using `sourceDirectory` configuration option, e.g.:
+
+```xml
+<plugin>
+    <groupId>io.github.evis</groupId>
+    <artifactId>scalafix-maven-plugin</artifactId>
+    <version>0.1.3_0.9.5</version>
+    <configuration>
+        <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
+    </configuration>
+</plugin>
+```
 
 ## Usage
 
