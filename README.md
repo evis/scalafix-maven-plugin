@@ -11,12 +11,12 @@ Add plugin into `plugins` node of `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin</artifactId>
-        <version>0.1.3_0.9.5</version>
+        <version>0.1.4_0.9.23</version>
     </plugin>
 </plugins>
 ```
 
-Where `0.1.3` is version of plugin itself, and `0.9.5` is version of Scalafix invoked by plugin.
+Where `0.1.4` is version of the plugin itself, and `0.9.23` is version of Scalafix invoked by the plugin.
 
 Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project (note the dot at the start of filename). You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
@@ -58,7 +58,7 @@ By default, sources should be located inside `src/main/scala` directory. Though,
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.3_0.9.5</version>
+    <version>0.1.4_0.9.23</version>
     <configuration>
         <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
     </configuration>
@@ -96,7 +96,7 @@ Also, you can pass parameters via `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin</artifactId>
-        <version>0.1.3_0.9.5</version>
+        <version>0.1.4_0.9.23</version>
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
@@ -111,12 +111,12 @@ If you want to use external rules, add jars containing rules to dependencies of 
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.3_0.9.5</version>
+    <version>0.1.4_0.9.23</version>
     <dependencies>
         <dependency>
             <groupId>com.nequissimus</groupId>
             <artifactId>sort-imports_2.12</artifactId>
-            <version>0.3.1</version>
+            <version>0.5.5</version>
         </dependency>
     </dependencies>
 </plugin>
