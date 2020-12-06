@@ -133,35 +133,33 @@ object ScalafixArgumentsBuilder {
 
     def withToolClasspath(
         toolClasspath: Option[URLClassLoader]): ScalafixArguments =
-      withOpt(_.withToolClasspath, toolClasspath)
+      withOpt(toolClasspath)(_.withToolClasspath)
 
     def withWorkingDirectory(
         workingDirectory: Option[Path]): ScalafixArguments =
-      withOpt(_.withWorkingDirectory, workingDirectory)
+      withOpt(workingDirectory)(_.withWorkingDirectory)
 
     def withMode(mode: Option[ScalafixMainMode]): ScalafixArguments =
-      withOpt(_.withMode, mode)
+      withOpt(mode)(_.withMode)
 
     def withPrintStream(printStream: Option[PrintStream]): ScalafixArguments =
-      withOpt(_.withPrintStream, printStream)
+      withOpt(printStream)(_.withPrintStream)
 
     def withSourceroot(sourceroot: Option[Path]): ScalafixArguments =
-      withOpt(_.withSourceroot, sourceroot)
+      withOpt(sourceroot)(_.withSourceroot)
 
     def withMainCallback(
         mainCallback: Option[ScalafixMainCallback]): ScalafixArguments =
-      withOpt(_.withMainCallback, mainCallback)
+      withOpt(mainCallback)(_.withMainCallback)
 
     def withCharset(charset: Option[Charset]): ScalafixArguments =
-      withOpt(_.withCharset, charset)
+      withOpt(charset)(_.withCharset)
 
     def withScalaVersion(scalaVersion: Option[String]): ScalafixArguments =
-      withOpt(_.withScalaVersion, scalaVersion)
+      withOpt(scalaVersion)(_.withScalaVersion)
 
-    private def withOpt[A](
-        f: ScalafixArguments => A => ScalafixArguments,
-        value: Option[A]
-    ): ScalafixArguments =
+    private def withOpt[A](value: Option[A])(
+        f: ScalafixArguments => A => ScalafixArguments): ScalafixArguments =
       value.fold(arguments)(f(arguments))
   }
 }
