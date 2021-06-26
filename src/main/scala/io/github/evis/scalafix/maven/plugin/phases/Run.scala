@@ -13,7 +13,7 @@ trait Run
     val scalafix = loadScalafix()
     val arguments = buildScalafixArguments(scalafix, params)
     logger.log(arguments)
-    val errors = arguments.map(_.run().toList).getOrElse(Nil)
+    val errors = arguments.fold(_ => Nil, _.run().toList)
     showErrors(errors)
   }
 }

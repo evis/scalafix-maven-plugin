@@ -8,6 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        command:
+          - "-Pscala-2.11"
+          - "-Pscala-2.12"
+          - "-Pscala-2.13"
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
@@ -15,4 +22,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn test
+      run: mvn ${{ matrix.command }} test

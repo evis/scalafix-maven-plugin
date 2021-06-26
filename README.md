@@ -10,7 +10,7 @@ Add plugin into `plugins` node of `pom.xml`:
 <plugins>
     <plugin>
         <groupId>io.github.evis</groupId>
-        <artifactId>scalafix-maven-plugin</artifactId>
+        <artifactId>scalafix-maven-plugin_2.12</artifactId>
         <version>0.1.4_0.9.23</version>
     </plugin>
 </plugins>
@@ -25,7 +25,7 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
 ```xml
 <plugin>
     <groupId>net.alchim31.maven</groupId>
-    <artifactId>scala-maven-plugin</artifactId>
+    <artifactId>scala-maven-plugin_${scala.binary.version}</artifactId>
     <version>${scala-maven-plugin.version}</version>
     <executions>
         <execution>
@@ -42,7 +42,7 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
         <compilerPlugins>
             <compilerPlugin>
                 <groupId>org.scalameta</groupId>
-                <artifactId>semanticdb-scalac_${scala.version}</artifactId>
+                <artifactId>semanticdb-scalac_${scala.binary.version}</artifactId>
                 <version>${semanticdb.version}</version>
             </compilerPlugin>
         </compilerPlugins>
@@ -57,7 +57,7 @@ By default, sources should be located inside `src/main/scala` directory. Though,
 ```xml
 <plugin>
     <groupId>io.github.evis</groupId>
-    <artifactId>scalafix-maven-plugin</artifactId>
+    <artifactId>scalafix-maven-plugin_2.11</artifactId>
     <version>0.1.4_0.9.23</version>
     <configuration>
         <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
@@ -95,7 +95,7 @@ Also, you can pass parameters via `pom.xml`:
 <plugins>
     <plugin>
         <groupId>io.github.evis</groupId>
-        <artifactId>scalafix-maven-plugin</artifactId>
+        <artifactId>scalafix-maven-plugin_2.13</artifactId>
         <version>0.1.4_0.9.23</version>
         <configuration>
             <mode>CHECK</mode>
@@ -110,7 +110,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 ```xml
 <plugin>
     <groupId>io.github.evis</groupId>
-    <artifactId>scalafix-maven-plugin</artifactId>
+    <artifactId>scalafix-maven-plugin_2.12</artifactId>
     <version>0.1.4_0.9.23</version>
     <dependencies>
         <dependency>
@@ -150,13 +150,13 @@ CLI name | Maven configuration name | Type | Description
                 <plugins>
                     <plugin>
                         <groupId>net.alchim31.maven</groupId>
-                        <artifactId>scala-maven-plugin</artifactId>
+                        <artifactId>scala-maven-plugin_${scala.binary.version}</artifactId>
                         <version>${scala-maven-plugin.version}</version>
                         <configuration>
                             <compilerPlugins>
                                 <compilerPlugin>
                                     <groupId>org.scalameta</groupId>
-                                    <artifactId>semanticdb-scalac_${scala.version}</artifactId>
+                                    <artifactId>semanticdb-scalac_${scala.binary.version}</artifactId>
                                     <version>${semanticdb.version}</version>
                                 </compilerPlugin>
                             </compilerPlugins>
