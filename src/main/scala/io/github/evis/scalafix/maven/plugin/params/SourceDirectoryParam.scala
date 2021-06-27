@@ -4,9 +4,12 @@ import java.nio.file.Paths
 
 object SourceDirectoryParam {
 
-  def apply(sourceDirectory: String): MojoParam = {
-    _.withPaths(List(getCanonicalPath(sourceDirectory)).filter(_.toFile.exists))
+  def apply(dirs: Iterable[String]): MojoParam = {
+    _.withPaths(
+      dirs.map(getCanonicalPath).filter(_.toFile.exists).toList.distinct)
   }
+
+  def apply(dirs: String*): MojoParam = apply(dirs)
 
   // Usually we execute plugin on source directory with path either like
   // src/{main,test}/java/../scala or src/{main,test}/scala/../scala. Anyway,
