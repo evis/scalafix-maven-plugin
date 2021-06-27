@@ -2,12 +2,10 @@ package io.github.evis.scalafix.maven.plugin.params
 
 import org.apache.maven.artifact.Artifact
 
-import scala.collection.JavaConverters._
-
 object ProjectDependenciesParam {
 
-  def apply(projectDependencies: java.util.Set[Artifact]): MojoParam = {
-    val deps = projectDependencies.asScala.toList
+  def apply(projectDependencies: Iterable[Artifact]): MojoParam = {
+    val deps = projectDependencies.toList
     val scalaLibrary =
       deps.find { dep =>
         dep.getGroupId == "org.scala-lang" && dep.getArtifactId == "scala-library"
