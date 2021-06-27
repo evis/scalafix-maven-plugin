@@ -7,6 +7,8 @@ import org.apache.maven.artifact.Artifact
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter, ResolutionScope}
+
+import scala.collection.JavaConverters._
 import scalafix.interfaces.ScalafixMainMode
 
 //noinspection VarCouldBeVal
@@ -88,10 +90,10 @@ final class ScalafixMojo extends AbstractMojo {
         List(
           SourceDirectoryParam(sourceDirectory).ifNot(skipMain),
           SourceDirectoryParam(testSourceDirectory).ifNot(skipTest),
-          ProjectDependenciesParam(projectDependencies),
+          ProjectDependenciesParam(projectDependencies.asScala),
           CompiledDirectoryParam(compiledDirectory),
           CompiledDirectoryParam(testCompiledDirectory),
-          PluginsParam(plugins),
+          PluginsParam(plugins.asScala),
           ModeParam(mode),
           ConfigParam(config),
           CommandLineArgsParam(commandLineArgs)
