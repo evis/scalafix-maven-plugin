@@ -96,12 +96,13 @@ final class ScalafixMojo extends AbstractMojo {
         "test",
         testSourceDirectory
       )
+      val mainOutputs = if (skipMain) Seq.empty else Seq(compiledDirectory)
+      val testOutputs = if (skipTest) Seq.empty else Seq(testCompiledDirectory)
       val params =
         List(
           SourceDirectoryParam(mainSources ++ testSources),
           ProjectDependenciesParam(projectDependencies.asScala),
-          CompiledDirectoryParam(compiledDirectory),
-          CompiledDirectoryParam(testCompiledDirectory),
+          CompiledDirectoryParam(mainOutputs ++ testOutputs),
           PluginsParam(plugins.asScala),
           ModeParam(mode),
           ConfigParam(config),

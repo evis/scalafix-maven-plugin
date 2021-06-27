@@ -1,10 +1,11 @@
 package io.github.evis.scalafix.maven.plugin.params
 
-import java.nio.file.Paths
-
 object CompiledDirectoryParam {
 
-  def apply(compiledDirectory: String): MojoParam = {
-    _.withClasspath(List(getPath(compiledDirectory)).filter(_.toFile.exists))
+  def apply(dirs: Iterable[String]): MojoParam = {
+    _.withClasspath(dirs.map(getPath).filter(_.toFile.exists).toList)
   }
+
+  def apply(dirs: String*): MojoParam = apply(dirs)
+
 }
