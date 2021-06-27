@@ -4,7 +4,10 @@ import java.nio.file.Paths
 
 object CompiledDirectoryParam {
 
-  def apply(compiledDirectory: String): MojoParam = {
-    _.withClasspath(List(Paths.get(compiledDirectory)).filter(_.toFile.exists))
+  def apply(dirs: List[String]): MojoParam = _.withClasspath {
+    dirs.map(Paths.get(_)).filter(_.toFile.exists)
   }
+
+  def apply(dirs: String*): MojoParam = apply(dirs.toList)
+
 }

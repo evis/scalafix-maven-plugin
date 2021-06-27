@@ -4,8 +4,8 @@ import java.nio.file.Paths
 
 object SourceDirectoryParam {
 
-  def apply(sourceDirectory: String): MojoParam = {
-    _.withPaths(List(getCanonicalPath(sourceDirectory)).filter(_.toFile.exists))
+  def apply(dirs: List[String]): MojoParam = _.withPaths {
+    dirs.map(getCanonicalPath).filter(_.toFile.exists)
   }
 
   // Usually we execute plugin on source directory with path either like

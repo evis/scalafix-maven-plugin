@@ -10,12 +10,10 @@ class CompiledDirectoryParamSpec extends ParamSpec {
     CompiledDirectoryParam("src/main/unexisting").applied.classpath shouldBe empty
   }
 
-  it should "add both classpaths if invoked twice on the same Scalafix arguments builder" in {
+  it should "add all classpaths if invoked with multiple" in {
     val result =
-      List(
-        CompiledDirectoryParam("src/main/scala"),
-        CompiledDirectoryParam("src/test/scala")
-      ).applied.classpath.map(_.toString)
+      CompiledDirectoryParam("src/main/scala", "src/test/scala").applied.classpath
+        .map(_.toString)
     result should contain theSameElementsAs List(
       "src/main/scala",
       "src/test/scala")

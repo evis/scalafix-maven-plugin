@@ -94,13 +94,13 @@ final class ScalafixMojo extends AbstractMojo {
       getLog.info(
         "Skip scalafix since both skip.main and skip.test flags passed")
     } else {
+      val mainOutputs = if (skipMain) Nil else List(compiledDirectory)
+      val testOutputs = if (skipTest) Nil else List(testCompiledDirectory)
       val params =
         List(
-          SourceDirectoryParam(sourceDirectory).ifNot(skipMain),
-          SourceDirectoryParam(testSourceDirectory).ifNot(skipTest),
+          getSourceParam,
           ProjectDependenciesParam(projectDependencies.asScala),
-          CompiledDirectoryParam(compiledDirectory),
-          CompiledDirectoryParam(testCompiledDirectory),
+          CompiledDirectoryParam(mainOutputs ++ testOutputs),
           PluginsParam(plugins.asScala),
           ModeParam(mode),
           ConfigParam(config),
@@ -109,4 +109,11 @@ final class ScalafixMojo extends AbstractMojo {
       run(params, getLog)
     }
   }
+
+  private def getSourceParam: MojoParam = {
+    val main = if (skipMain) Nil else List(sourceDirectory)
+    val test = if (skipTest) Nil else List(testSourceDirectory)
+    SourceDirectoryParam(main ++ test)
+  }
+
 }
