@@ -5,6 +5,6 @@ import java.nio.file.Paths
 object CompiledDirectoryParam {
 
   def apply(compiledDirectory: String): MojoParam = {
-    _.withClasspath(List(Paths.get(compiledDirectory)).filter(_.toFile.exists))
+    _.withClasspath(List(getPath(compiledDirectory)).filter(_.toFile.exists))
   }
 }
