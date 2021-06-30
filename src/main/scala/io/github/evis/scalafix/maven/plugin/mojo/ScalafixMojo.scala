@@ -26,6 +26,12 @@ final class ScalafixMojo extends AbstractMojo {
   // (keep one empty line after comment to avoid removal of the comment by
   // scalafix)
 
+  @Parameter(property = "scalafix.mainSourceDirectories")
+  private var mainSourceDirectories: JList[File] = _
+
+  @Parameter(property = "scalafix.testSourceDirectories")
+  private var testSourceDirectories: JList[File] = _
+
   @Parameter(required = true, readonly = true, defaultValue = "${project}")
   private var project: MavenProject = _
 
@@ -60,6 +66,7 @@ final class ScalafixMojo extends AbstractMojo {
         skipMain,
         "main",
         buildPath,
+        mainSourceDirectories,
         project.getCompileSourceRoots,
         build.getSourceDirectory
       )
@@ -67,6 +74,7 @@ final class ScalafixMojo extends AbstractMojo {
         skipTest,
         "test",
         buildPath,
+        testSourceDirectories,
         project.getTestCompileSourceRoots,
         build.getTestSourceDirectory
       )
@@ -92,10 +100,12 @@ final class ScalafixMojo extends AbstractMojo {
       flag: Boolean,
       flagName: String,
       outputDir: Path,
+      customDirs: JList[File],
       projectDirs: JList[String],
       projectDir: String): Iterable[File] = {
     val dirs =
       if (flag) Seq.empty
+      else if (!customDirs.isEmpty) customDirs.asScala
       else
         new File(projectDir, "/../scala") +: projectDirs.asScala.flatMap { x =>
           val file = getFile(x)
