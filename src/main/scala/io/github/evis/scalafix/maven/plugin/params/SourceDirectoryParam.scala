@@ -1,11 +1,11 @@
 package io.github.evis.scalafix.maven.plugin.params
 
-import java.nio.file.Paths
+object SourceDirectoryParam extends SourceDirectoryParam(FileOps)
 
-object SourceDirectoryParam {
+class SourceDirectoryParam(fileOps: FileOps) {
 
   def apply(dirs: List[String]): MojoParam = _.withPaths {
-    dirs.map(getCanonicalPath).filter(_.toFile.exists)
+    dirs.map(getCanonicalPath).filter(x => fileOps.exists(x.toFile))
   }
 
   // Usually we execute plugin on source directory with path either like
@@ -14,5 +14,5 @@ object SourceDirectoryParam {
   // exception when tries to find sources by relative path. As a workaround, we
   // provide canonical path for Scalafix.
   private def getCanonicalPath(directory: String) =
-    Paths.get(directory).toFile.getCanonicalFile.toPath
+    fileOps.getPath(directory).toFile.getCanonicalFile.toPath
 }
