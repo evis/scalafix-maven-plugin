@@ -86,12 +86,16 @@ final class ScalafixMojo extends AbstractMojo {
       getLog.info(
         "Skip scalafix since both skip.main and skip.test flags passed")
     } else {
-      val mainSources =
-        if (skipMain) Seq.empty
-        else Seq(sourceDirectory)
-      val testSources =
-        if (skipTest) Seq.empty
-        else Seq(testSourceDirectory)
+      val mainSources = getSources(
+        skipMain,
+        "main",
+        sourceDirectory
+      )
+      val testSources = getSources(
+        skipTest,
+        "test",
+        testSourceDirectory
+      )
       val params =
         List(
           SourceDirectoryParam(mainSources ++ testSources),
@@ -105,5 +109,18 @@ final class ScalafixMojo extends AbstractMojo {
         )
       run(params, getLog)
     }
+  }
+
+  private def getSources(
+      flag: Boolean,
+      flagName: String,
+      projectDir: String): Iterable[File] = {
+    val dirs =
+      if (flag) Seq.empty
+      else
+        new File(projectDir, "/../scala") :: Nil
+    if (dirs.isEmpty) getLog.info(s"Skip scalafix[$flagName]")
+    else dirs.foreach(dir => getLog.info(s"Processing[$flagName]: $dir"))
+    dirs
   }
 }
