@@ -1,5 +1,7 @@
 package io.github.evis.scalafix.maven.plugin
 
+import java.nio.file.Paths
+
 package object params {
 
   type MojoParam = ScalafixArgumentsBuilder => ScalafixArgumentsBuilder
@@ -17,5 +19,9 @@ package object params {
     def applied: ScalafixArgumentsBuilder =
       params.foldLeft(ScalafixArgumentsBuilder())(_.patch(_))
   }
+
+  def getPath(path: String) = Paths.get(path)
+
+  def getFile(path: String) = getPath(path).toFile
 
 }

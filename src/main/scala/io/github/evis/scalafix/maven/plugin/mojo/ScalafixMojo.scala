@@ -1,12 +1,15 @@
 package io.github.evis.scalafix.maven.plugin.mojo
 
 import java.io.File
+import java.nio.file.Path
+import java.util.{List => JList}
 
 import io.github.evis.scalafix.maven.plugin.params._
-import org.apache.maven.artifact.Artifact
-import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter, ResolutionScope}
+import org.apache.maven.project.MavenProject
+
+import scala.collection.JavaConverters._
 import scalafix.interfaces.ScalafixMainMode
 
 //noinspection VarCouldBeVal
@@ -23,47 +26,20 @@ final class ScalafixMojo extends AbstractMojo {
   // (keep one empty line after comment to avoid removal of the comment by
   // scalafix)
 
-  @Parameter(
-    defaultValue = "${project.build.sourceDirectory}/../scala",
-    required = true,
-    readonly = true)
-  private var sourceDirectory: String = _
+  @Parameter(property = "scalafix.mainSourceDirectories")
+  private var mainSourceDirectories: JList[File] = _
 
-  @Parameter(
-    defaultValue = "${project.build.testSourceDirectory}/../scala",
-    required = true,
-    readonly = true)
-  private var testSourceDirectory: String = _
+  @Parameter(property = "scalafix.testSourceDirectories")
+  private var testSourceDirectories: JList[File] = _
 
-  @Parameter(
-    defaultValue = "${project.artifacts}",
-    required = true,
-    readonly = true)
-  private var projectDependencies: java.util.Set[Artifact] = _
-
-  @Parameter(
-    defaultValue = "${project.build.outputDirectory}",
-    required = true,
-    readonly = true)
-  private var compiledDirectory: String = _
-
-  @Parameter(
-    defaultValue = "${project.build.testOutputDirectory}",
-    required = true,
-    readonly = true)
-  private var testCompiledDirectory: String = _
-
-  @Parameter(
-    defaultValue = "${project.build.plugins}",
-    required = true,
-    readonly = true)
-  private var plugins: java.util.List[Plugin] = _
+  @Parameter(required = true, readonly = true, defaultValue = "${project}")
+  private var project: MavenProject = _
 
   @Parameter(property = "scalafix.mode", defaultValue = "IN_PLACE")
   private var mode: ScalafixMainMode = _
 
   @Parameter(property = "scalafix.command.line.args")
-  private var commandLineArgs: java.util.List[String] = _
+  private var commandLineArgs: JList[String] = _
 
   @Parameter(property = "scalafix.skip", defaultValue = "false")
   private var skip: Boolean = _
@@ -84,19 +60,59 @@ final class ScalafixMojo extends AbstractMojo {
       getLog.info(
         "Skip scalafix since both skip.main and skip.test flags passed")
     } else {
+      val build = project.getBuild
+      val buildPath = getPath(build.getDirectory)
+      val mainSources = getSources(
+        skipMain,
+        "main",
+        buildPath,
+        mainSourceDirectories,
+        project.getCompileSourceRoots,
+        build.getSourceDirectory
+      )
+      val testSources = getSources(
+        skipTest,
+        "test",
+        buildPath,
+        testSourceDirectories,
+        project.getTestCompileSourceRoots,
+        build.getTestSourceDirectory
+      )
+      val mainOutputs =
+        if (skipMain) Seq.empty else Seq(build.getOutputDirectory)
+      val testOutputs =
+        if (skipTest) Seq.empty else Seq(build.getTestOutputDirectory)
       val params =
         List(
-          SourceDirectoryParam(sourceDirectory).ifNot(skipMain),
-          SourceDirectoryParam(testSourceDirectory).ifNot(skipTest),
-          ProjectDependenciesParam(projectDependencies),
-          CompiledDirectoryParam(compiledDirectory),
-          CompiledDirectoryParam(testCompiledDirectory),
-          PluginsParam(plugins),
+          SourceDirectoryParam(mainSources ++ testSources),
+          ProjectDependenciesParam(project.getArtifacts.asScala),
+          CompiledDirectoryParam(mainOutputs ++ testOutputs),
+          PluginsParam(build.getPlugins.asScala),
           ModeParam(mode),
           ConfigParam(config),
           CommandLineArgsParam(commandLineArgs)
         )
       run(params, getLog)
     }
+  }
+
+  private def getSources(
+      flag: Boolean,
+      flagName: String,
+      outputDir: Path,
+      customDirs: JList[File],
+      projectDirs: JList[String],
+      projectDir: String): Iterable[File] = {
+    val dirs =
+      if (flag) Seq.empty
+      else if (!customDirs.isEmpty) customDirs.asScala
+      else
+        new File(projectDir, "/../scala") +: projectDirs.asScala.flatMap { x =>
+          val file = getFile(x)
+          if (file.toPath.startsWith(outputDir)) None else Some(file)
+        }
+    if (dirs.isEmpty) getLog.info(s"Skip scalafix[$flagName]")
+    else dirs.foreach(dir => getLog.info(s"Processing[$flagName]: $dir"))
+    dirs
   }
 }

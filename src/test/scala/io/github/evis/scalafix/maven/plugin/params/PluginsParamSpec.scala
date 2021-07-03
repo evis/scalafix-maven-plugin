@@ -5,8 +5,6 @@ import java.io.StringReader
 import org.apache.maven.model.Plugin
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder
 
-import scala.collection.JavaConverters._
-
 class PluginsParamSpec extends ParamSpec {
 
   def scalaPlugin(args: List[String]): Plugin = {
@@ -26,13 +24,13 @@ class PluginsParamSpec extends ParamSpec {
 
   "PluginsParam" should "return scalacOptions if they exist" in {
     PluginsParam(
-      List(scalaPlugin("-Xlint" :: "-Ypartial-unification" :: Nil)).asJava).applied.scalacOptions shouldBe List(
+      List(scalaPlugin("-Xlint" :: "-Ypartial-unification" :: Nil))).applied.scalacOptions shouldBe List(
       "-Xlint",
       "-Ypartial-unification")
   }
 
   it should "return no scalacOptions if they are not set" in {
-    PluginsParam(List(scalaPlugin(Nil)).asJava).applied.scalacOptions shouldBe Nil
+    PluginsParam(List(scalaPlugin(Nil))).applied.scalacOptions shouldBe Nil
   }
 
 }
