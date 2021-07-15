@@ -11,7 +11,7 @@
     <url>https://github.com/evis/scalafix-maven-plugin</url>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.4_0.9.23</version>
+    <version>0.1.5_0.9.29</version>
     <licenses>
         <license>
             <name>BSD-3-Clause</name>
@@ -32,9 +32,9 @@
     </scm>
     <properties>
         <maven-plugin.version>3.6.0</maven-plugin.version>
-        <scalafix.version>0.9.23</scalafix.version>
-        <scala.major.version>2.12</scala.major.version>
-        <scala.version>2.12.12</scala.version>
+        <scalafix.version>0.9.29</scalafix.version>
+        <scala.major.version>2.13</scala.major.version>
+        <scala.version>2.13.6</scala.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
         <!-- java 8 is required for static interface
@@ -48,7 +48,7 @@
         <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
         <scalafmt.version>1.5.1</scalafmt.version>
         <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
-        <semanticdb.version>4.3.24</semanticdb.version>
+        <semanticdb.version>4.4.23</semanticdb.version>
     </properties>
     <packaging>maven-plugin</packaging>
     <build>
@@ -71,7 +71,6 @@
                 <version>${scala-maven-plugin.version}</version>
                 <configuration>
                     <args>
-                        <arg>-Ywarn-adapted-args</arg>
                         <arg>-Ywarn-unused</arg>
                     </args>
                     <compilerPlugins>
@@ -199,6 +198,11 @@
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
             <version>${scala.version}</version>
         </dependency>
         <dependency>
