@@ -10,8 +10,8 @@
     </description>
     <url>https://github.com/evis/scalafix-maven-plugin</url>
     <groupId>io.github.evis</groupId>
-    <artifactId>scalafix-maven-plugin</artifactId>
-    <version>0.1.4_0.9.23</version>
+    <artifactId>scalafix-maven-plugin_${scala.major.version}</artifactId>
+    <version>0.1.4_${scalafix.version}</version>
     <licenses>
         <license>
             <name>BSD-3-Clause</name>
@@ -30,11 +30,35 @@
         <developerConnection>scm:git:ssh://github.com:evis/scalafix-maven-plugin.git</developerConnection>
         <url>http://github.com/evis/scalafix-maven-plugin/tree/master</url>
     </scm>
+    <profiles>
+        <profile>
+            <id>scala-2.11</id>
+            <properties>
+                <scala.major.version>2.11</scala.major.version>
+                <scala.patch.version>12</scala.patch.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.12</id>
+            <properties>
+                <scala.major.version>2.12</scala.major.version>
+                <scala.patch.version>12</scala.patch.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.13</id>
+            <properties>
+                <scala.major.version>2.13</scala.major.version>
+                <scala.patch.version>3</scala.patch.version>
+            </properties>
+        </profile>
+    </profiles>
     <properties>
         <maven-plugin.version>3.6.0</maven-plugin.version>
         <scalafix.version>0.9.23</scalafix.version>
         <scala.major.version>2.12</scala.major.version>
-        <scala.version>2.12.12</scala.version>
+        <scala.patch.version>12</scala.patch.version>
+        <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
         <!-- java 8 is required for static interface
@@ -49,6 +73,7 @@
         <scalafmt.version>1.5.1</scalafmt.version>
         <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
         <semanticdb.version>4.3.24</semanticdb.version>
+        <scala-cross-maven-plugin.version>0.3.0</scala-cross-maven-plugin.version>
     </properties>
     <packaging>maven-plugin</packaging>
     <build>
@@ -56,6 +81,19 @@
         <sourceDirectory>src/main/scala</sourceDirectory>
         <testSourceDirectory>src/test/scala</testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.spurint.maven.plugins</groupId>
+                <artifactId>scala-cross-maven-plugin</artifactId>
+                <version>${scala-cross-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>rewrite-pom</id>
+                        <goals>
+                            <goal>rewrite-pom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -71,7 +109,7 @@
                 <version>${scala-maven-plugin.version}</version>
                 <configuration>
                     <args>
-                        <arg>-Ywarn-adapted-args</arg>
+                        <arg>-target:jvm-1.8</arg>
                         <arg>-Ywarn-unused</arg>
                     </args>
                     <compilerPlugins>
@@ -99,8 +137,9 @@
                      strange ArrayIndexOutOfBoundsException on building plugin.
                      source: https://stackoverflow.com/a/47043146/5053865 -->
                 <configuration>
+                    <goalPrefix>scalafix</goalPrefix>
                     <mojoDependencies>
-                        <param>io.github.evis:scalafix-maven-plugin</param>
+                        <param>${groupId}:${artifactId}</param>
                     </mojoDependencies>
                 </configuration>
             </plugin>
