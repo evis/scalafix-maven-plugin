@@ -72,7 +72,7 @@
         <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
         <scalafmt.version>1.5.1</scalafmt.version>
         <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
-        <semanticdb.version>4.3.24</semanticdb.version>
+        <semanticdb.version>4.4.29</semanticdb.version>
         <scala-cross-maven-plugin.version>0.3.0</scala-cross-maven-plugin.version>
     </properties>
     <packaging>maven-plugin</packaging>
