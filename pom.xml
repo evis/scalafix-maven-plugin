@@ -42,14 +42,14 @@
             <id>scala-2.12</id>
             <properties>
                 <scala.major.version>2.12</scala.major.version>
-                <scala.patch.version>12</scala.patch.version>
+                <scala.patch.version>15</scala.patch.version>
             </properties>
         </profile>
         <profile>
             <id>scala-2.13</id>
             <properties>
                 <scala.major.version>2.13</scala.major.version>
-                <scala.patch.version>3</scala.patch.version>
+                <scala.patch.version>6</scala.patch.version>
             </properties>
         </profile>
     </profiles>
