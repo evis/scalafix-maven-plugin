@@ -49,30 +49,31 @@
             <id>scala-2.13</id>
             <properties>
                 <scala.major.version>2.13</scala.major.version>
-                <scala.patch.version>6</scala.patch.version>
+                <scala.patch.version>7</scala.patch.version>
             </properties>
         </profile>
     </profiles>
     <properties>
-        <maven-plugin.version>3.6.0</maven-plugin.version>
-        <scalafix.version>0.9.31</scalafix.version>
+        <maven-plugin-api.version>3.8.4</maven-plugin-api.version>
+        <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
+        <maven-plugin-plugin.version>3.6.2</maven-plugin-plugin.version>
+        <scalafix.version>0.9.33</scalafix.version>
         <scala.major.version>2.12</scala.major.version>
-        <scala.patch.version>12</scala.patch.version>
+        <scala.patch.version>15</scala.patch.version>
         <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
         <!-- java 8 is required for static interface
              Scalafix.classloaderInstance() call -->
         <java.version>8</java.version>
-        <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <scalatest.version>3.0.8</scalatest.version>
-        <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
-        <scalafmt.version>1.5.1</scalafmt.version>
-        <mvn-scalafmt.version>0.11</mvn-scalafmt.version>
-        <semanticdb.version>4.4.29</semanticdb.version>
+        <scalatest.version>3.0.9</scalatest.version>
+        <scalatest-maven-plugin.version>2.0.2</scalatest-maven-plugin.version>
+        <mvn-scalafmt.version>1.1.1640084764.9f463a9</mvn-scalafmt.version>
+        <semanticdb.version>4.4.31</semanticdb.version>
         <scala-cross-maven-plugin.version>0.3.0</scala-cross-maven-plugin.version>
     </properties>
     <packaging>maven-plugin</packaging>
@@ -132,7 +133,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>${maven-plugin.version}</version>
+                <version>${maven-plugin-plugin.version}</version>
                 <!-- tell plugin where to look for mojo annotations to avoid
                      strange ArrayIndexOutOfBoundsException on building plugin.
                      source: https://stackoverflow.com/a/47043146/5053865 -->
@@ -215,11 +216,11 @@
             <plugin>
                 <groupId>org.antipathy</groupId>
                 <artifactId>mvn-scalafmt_${scala.major.version}</artifactId>
-                <version>${mvn-scalafmt.version}_${scalafmt.version}</version>
+                <version>${mvn-scalafmt.version}</version>
             </plugin>
             <plugin>
                 <groupId>io.github.evis</groupId>
-                <artifactId>scalafix-maven-plugin</artifactId>
+                <artifactId>scalafix-maven-plugin_${scala.major.version}</artifactId>
                 <version>${version}</version>
             </plugin>
         </plugins>
@@ -228,12 +229,12 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>${maven-plugin.version}</version>
+            <version>${maven-plugin-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>${maven-plugin.version}</version>
+            <version>${maven-plugin-annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
