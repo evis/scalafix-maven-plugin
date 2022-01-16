@@ -54,6 +54,7 @@
         </profile>
     </profiles>
     <properties>
+        <maven-core.version>3.6.2</maven-core.version>
         <maven-plugin-api.version>3.8.4</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.6.2</maven-plugin-plugin.version>
@@ -226,6 +227,12 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>${maven-core.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>

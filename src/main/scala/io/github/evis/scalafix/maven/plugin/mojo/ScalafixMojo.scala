@@ -7,6 +7,7 @@ import org.apache.maven.artifact.Artifact
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter, ResolutionScope}
+import org.apache.maven.project.MavenProject
 
 import scala.collection.JavaConverters._
 import scalafix.interfaces.ScalafixMainMode
@@ -24,6 +25,13 @@ final class ScalafixMojo extends AbstractMojo {
   // Scala sources. scala-maven-plugin does the same.
   // (keep one empty line after comment to avoid removal of the comment by
   // scalafix)
+
+  @Parameter(
+    property = "project",
+    defaultValue = "${project}",
+    required = true,
+    readonly = true)
+  private var project: MavenProject = _
 
   @Parameter(
     defaultValue = "${project.build.sourceDirectory}/../scala",
