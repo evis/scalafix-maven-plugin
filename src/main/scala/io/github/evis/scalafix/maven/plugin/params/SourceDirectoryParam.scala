@@ -1,8 +1,13 @@
 package io.github.evis.scalafix.maven.plugin.params
 
+import java.nio.file.Path
+
 object SourceDirectoryParam extends SourceDirectoryParam(FileOps)
 
 class SourceDirectoryParam(fileOps: FileOps) {
+
+  private def create(dirs: List[Path]): MojoParam = _.withPaths(dirs)
+  def apply(dirs: String*): MojoParam = create(dirs.map(fileOps.getPath).toList)
 
   def apply(dirs: List[String]): MojoParam = _.withPaths {
     dirs.map(getCanonicalPath).filter(x => fileOps.exists(x.toFile))

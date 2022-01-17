@@ -18,7 +18,7 @@ class RunSpec extends BaseSpec with Run {
     val log = new TestLog(LogLevel.Debug)
     val params =
       List(
-        SourceDirectoryParam("src/test/resources/project" :: Nil),
+        SourceDirectoryParam("src/test/resources/project"),
         ConfigParam(
           new File("src/test/resources/project/.success.scalafix.conf")),
         ModeParam(CHECK)
@@ -30,7 +30,7 @@ class RunSpec extends BaseSpec with Run {
     val log = new TestLog(LogLevel.Debug)
     val params =
       List(
-        SourceDirectoryParam("src/test/resources/project" :: Nil),
+        SourceDirectoryParam("src/test/resources/project"),
         ConfigParam(new File("src/test/resources/project/.fail.scalafix.conf")),
         ModeParam(CHECK)
       )

@@ -10,9 +10,10 @@ class BuildScalafixArgumentsSpec extends BaseSpec with BuildScalafixArguments {
 
   "buildScalafixArguments()" should "build if source directory is given" in {
     val scalafix = new ScalafixImpl
-    val params = List(SourceDirectoryParam("src/main/scala" :: Nil))
-    val arguments = buildScalafixArguments(scalafix, params).right.value
-    arguments
+    val params = List(SourceDirectoryParam("src/main/scala"))
+    val res = buildScalafixArguments(scalafix, params)
+    res shouldBe a[Right[_, _]]
+    res.right.value
       .asInstanceOf[ScalafixArgumentsImpl]
       .args
       .files
@@ -21,14 +22,24 @@ class BuildScalafixArgumentsSpec extends BaseSpec with BuildScalafixArguments {
       .toString shouldBe "src/main/scala"
   }
 
-  it should "not build if source directory doesn't exist" in {
+  it should "not check if source directory doesn't exist" in {
     val scalafix = new ScalafixImpl
-    val params = List(SourceDirectoryParam("src/main/unexisting" :: Nil))
-    buildScalafixArguments(scalafix, params).left.value shouldBe EmptyPaths
+    val params = List(SourceDirectoryParam("src/main/unexisting"))
+    val res = buildScalafixArguments(scalafix, params)
+    res shouldBe a[Right[_, _]]
+    res.right.value
+      .asInstanceOf[ScalafixArgumentsImpl]
+      .args
+      .files
+      .loneElement
+      .toRelative
+      .toString shouldBe "src/main/unexisting"
   }
 
   it should "not build if source directory isn't given" in {
     val scalafix = new ScalafixImpl
-    buildScalafixArguments(scalafix, params = Nil).left.value shouldBe EmptyPaths
+    val res = buildScalafixArguments(scalafix, params = Nil)
+    res shouldBe a[Left[_, _]]
+    res.left.value shouldBe EmptyPaths
   }
 }
