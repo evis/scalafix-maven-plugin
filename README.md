@@ -132,6 +132,8 @@ CLI name | Maven configuration name | Maven type | Description
 `scalafix.skip.main` | `skipMain` | `Boolean` (default: `false`) | Whether we should skip formatting of application/library sources (by default located in `main/scala`).
 `scalafix.skip.test` | `skipTest` | `Boolean` (default: `false`) | Whether we should skip formatting of test sources (by default located in `/test/scala`).
 `scalafix.config` | `config` | `File` (default: `.scalafix.conf`) | Configuration with rules to invoke for Scalafix.
+`scalafix.mainSourceDirectories` | `mainSourceDirectories` | `List[File]` (default: see below) | Which main source directories to format.
+`scalafix.testSourceDirectories` | `testSourceDirectories` | `List[File]` (default: see below) | Which test source directories to format.
 
 > The plugin determines code paths to process the same way the compiler would; by default, from
 > `build.sourceDirectory` property, but could be added by another plugin 

@@ -33,6 +33,12 @@ final class ScalafixMojo extends AbstractMojo {
     readonly = true)
   private var project: MavenProject = _
 
+  @Parameter(property = "scalafix.mainSourceDirectories")
+  private var mainSourceDirectories: JList[File] = _
+
+  @Parameter(property = "scalafix.testSourceDirectories")
+  private var testSourceDirectories: JList[File] = _
+
   @Parameter(property = "scalafix.mode", defaultValue = "IN_PLACE")
   private var mode: ScalafixMainMode = _
 
@@ -77,8 +83,10 @@ final class ScalafixMojo extends AbstractMojo {
 
   private def getSourceParam: MojoParam = {
     val lookup = new SourceDirectoryLookup(FileOps, project)
-    val main = checkSources("main", skipMain)(lookup.getMain(Nil))
-    val test = checkSources("test", skipTest)(lookup.getTest(Nil))
+    val main = checkSources("main", skipMain)(
+      lookup.getMain(mainSourceDirectories.asScala))
+    val test = checkSources("test", skipTest)(
+      lookup.getTest(testSourceDirectories.asScala))
     SourceDirectoryParam(main ++ test)
   }
 
