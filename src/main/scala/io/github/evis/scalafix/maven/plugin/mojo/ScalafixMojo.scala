@@ -1,12 +1,15 @@
 package io.github.evis.scalafix.maven.plugin.mojo
 
 import java.io.File
+import java.nio.file.Path
+import java.util.{List => JList}
 
 import io.github.evis.scalafix.maven.plugin.params._
-import org.apache.maven.artifact.Artifact
-import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter, ResolutionScope}
+import org.apache.maven.project.MavenProject
+
+import scala.collection.JavaConverters._
 import scalafix.interfaces.ScalafixMainMode
 
 //noinspection VarCouldBeVal
@@ -24,46 +27,23 @@ final class ScalafixMojo extends AbstractMojo {
   // scalafix)
 
   @Parameter(
-    defaultValue = "${project.build.sourceDirectory}/../scala",
+    property = "project",
+    defaultValue = "${project}",
     required = true,
     readonly = true)
-  private var sourceDirectory: String = _
+  private var project: MavenProject = _
 
-  @Parameter(
-    defaultValue = "${project.build.testSourceDirectory}/../scala",
-    required = true,
-    readonly = true)
-  private var testSourceDirectory: String = _
+  @Parameter(property = "scalafix.mainSourceDirectories")
+  private var mainSourceDirectories: JList[File] = _
 
-  @Parameter(
-    defaultValue = "${project.artifacts}",
-    required = true,
-    readonly = true)
-  private var projectDependencies: java.util.Set[Artifact] = _
-
-  @Parameter(
-    defaultValue = "${project.build.outputDirectory}",
-    required = true,
-    readonly = true)
-  private var compiledDirectory: String = _
-
-  @Parameter(
-    defaultValue = "${project.build.testOutputDirectory}",
-    required = true,
-    readonly = true)
-  private var testCompiledDirectory: String = _
-
-  @Parameter(
-    defaultValue = "${project.build.plugins}",
-    required = true,
-    readonly = true)
-  private var plugins: java.util.List[Plugin] = _
+  @Parameter(property = "scalafix.testSourceDirectories")
+  private var testSourceDirectories: JList[File] = _
 
   @Parameter(property = "scalafix.mode", defaultValue = "IN_PLACE")
   private var mode: ScalafixMainMode = _
 
   @Parameter(property = "scalafix.command.line.args")
-  private var commandLineArgs: java.util.List[String] = _
+  private var commandLineArgs: JList[String] = _
 
   @Parameter(property = "scalafix.skip", defaultValue = "false")
   private var skip: Boolean = _
@@ -84,14 +64,15 @@ final class ScalafixMojo extends AbstractMojo {
       getLog.info(
         "Skip scalafix since both skip.main and skip.test flags passed")
     } else {
+      val bld = project.getBuild
+      val mainOutputs = if (skipMain) Nil else List(bld.getOutputDirectory)
+      val testOutputs = if (skipTest) Nil else List(bld.getTestOutputDirectory)
       val params =
         List(
-          SourceDirectoryParam(sourceDirectory).ifNot(skipMain),
-          SourceDirectoryParam(testSourceDirectory).ifNot(skipTest),
-          ProjectDependenciesParam(projectDependencies),
-          CompiledDirectoryParam(compiledDirectory),
-          CompiledDirectoryParam(testCompiledDirectory),
-          PluginsParam(plugins),
+          getSourceParam,
+          ProjectDependenciesParam(project.getArtifacts.asScala),
+          CompiledDirectoryParam(mainOutputs ++ testOutputs),
+          PluginsParam(bld.getPlugins.asScala),
           ModeParam(mode),
           ConfigParam(config),
           CommandLineArgsParam(commandLineArgs)
@@ -99,4 +80,22 @@ final class ScalafixMojo extends AbstractMojo {
       run(params, getLog)
     }
   }
+
+  private def getSourceParam: MojoParam = {
+    val lookup = new SourceDirectoryLookup(FileOps, project)
+    val main = checkSources("main", skipMain)(
+      lookup.getMain(mainSourceDirectories.asScala))
+    val test = checkSources("test", skipTest)(
+      lookup.getTest(testSourceDirectories.asScala))
+    SourceDirectoryParam(main ++ test)
+  }
+
+  private def checkSources(flagName: String, skip: Boolean)(
+      getPaths: => List[Path]): List[Path] = {
+    val paths = if (skip) Nil else getPaths
+    if (paths.isEmpty) getLog.info(s"Skip scalafix[$flagName]")
+    else paths.foreach(dir => getLog.info(s"Processing[$flagName]: $dir"))
+    paths
+  }
+
 }

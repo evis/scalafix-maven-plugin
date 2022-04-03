@@ -3,7 +3,6 @@ package io.github.evis.scalafix.maven.plugin.params
 import org.apache.maven.model.Plugin
 import org.codehaus.plexus.util.xml.Xpp3Dom
 
-import scala.collection.JavaConverters._
 import scala.util.Try
 
 object PluginsParam {
@@ -13,16 +12,16 @@ object PluginsParam {
     "com.triplequote.maven"
   )
 
-  def apply(plugins: java.util.List[Plugin]): MojoParam = {
+  def apply(plugins: Iterable[Plugin]): MojoParam = {
     _.withScalacOptions(
       plugins.findScalaPlugin.flatMap(config).toList.flatMap(compilerArgs))
   }
 
-  implicit private class PluginsOps(private val plugins: java.util.List[Plugin])
+  implicit private class PluginsOps(private val plugins: Iterable[Plugin])
       extends AnyVal {
 
     def findScalaPlugin: Option[Plugin] = {
-      plugins.asScala.find { plugin =>
+      plugins.find { plugin =>
         scalaPluginOrgs.contains(plugin.getGroupId) && plugin.getArtifactId == "scala-maven-plugin"
       }
     }
