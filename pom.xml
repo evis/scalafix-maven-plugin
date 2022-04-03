@@ -11,7 +11,7 @@
     <url>https://github.com/evis/scalafix-maven-plugin</url>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_${scala.major.version}</artifactId>
-    <version>0.1.4_${scalafix.version}</version>
+    <version>0.1.5_${scalafix.version}</version>
     <licenses>
         <license>
             <name>BSD-3-Clause</name>
@@ -59,8 +59,6 @@
         <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.6.2</maven-plugin-plugin.version>
         <scalafix.version>0.9.33</scalafix.version>
-        <!-- the version we'll use ourselves; can't be current as it's not built yet -->
-        <scalafix-plugin.version>0.1.4_0.9.23</scalafix-plugin.version>
         <scala.major.version>2.12</scala.major.version>
         <scala.patch.version>15</scala.patch.version>
         <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
@@ -224,7 +222,7 @@
             <plugin>
                 <groupId>io.github.evis</groupId>
                 <artifactId>scalafix-maven-plugin_${scala.major.version}</artifactId>
-                <version>${scalafix-plugin.version}</version>
+                <version>${version}</version>
             </plugin>
         </plugins>
     </build>
