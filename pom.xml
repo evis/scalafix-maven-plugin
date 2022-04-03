@@ -32,13 +32,6 @@
     </scm>
     <profiles>
         <profile>
-            <id>scala-2.11</id>
-            <properties>
-                <scala.major.version>2.11</scala.major.version>
-                <scala.patch.version>12</scala.patch.version>
-            </properties>
-        </profile>
-        <profile>
             <id>scala-2.12</id>
             <properties>
                 <scala.major.version>2.12</scala.major.version>

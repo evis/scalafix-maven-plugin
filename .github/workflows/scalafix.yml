@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         command:
-          - "-Pscala-2.11"
           - "-Pscala-2.12"
           - "-Pscala-2.13"
     steps:
