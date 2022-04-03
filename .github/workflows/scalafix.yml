@@ -22,4 +22,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Check code with Scalafix
-      run: mvn ${{ matrix.command }} clean install && mvn ${{ matrix.command }} scalafix:scalafix -Dscalafix.mode=CHECK
+      run: mvn -Dgpg.skip ${{ matrix.command }} clean install && mvn ${{ matrix.command }} scalafix:scalafix -Dscalafix.mode=CHECK
