@@ -52,8 +52,8 @@
         <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.6.2</maven-plugin-plugin.version>
         <scalafix.version>0.9.34</scalafix.version>
-        <scala.major.version>2.12</scala.major.version>
-        <scala.patch.version>15</scala.patch.version>
+        <scala.major.version>2.13</scala.major.version>
+        <scala.patch.version>8</scala.patch.version>
         <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
