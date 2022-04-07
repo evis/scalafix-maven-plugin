@@ -17,6 +17,8 @@ class ModeParamSpec extends ParamSpec {
   }
 
   it should "set AUTO_SUPPRESS_LINTER_ERRORS mode" in {
-    ModeParam(AUTO_SUPPRESS_LINTER_ERRORS).applied.mode.value shouldBe AUTO_SUPPRESS_LINTER_ERRORS
+    ModeParam(
+      AUTO_SUPPRESS_LINTER_ERRORS
+    ).applied.mode.value shouldBe AUTO_SUPPRESS_LINTER_ERRORS
   }
 }

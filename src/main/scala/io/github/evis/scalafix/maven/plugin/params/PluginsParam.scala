@@ -14,7 +14,8 @@ object PluginsParam {
 
   def apply(plugins: Iterable[Plugin]): MojoParam = {
     _.withScalacOptions(
-      plugins.findScalaPlugin.flatMap(config).toList.flatMap(compilerArgs))
+      plugins.findScalaPlugin.flatMap(config).toList.flatMap(compilerArgs)
+    )
   }
 
   implicit private class PluginsOps(private val plugins: Iterable[Plugin])
@@ -22,7 +23,9 @@ object PluginsParam {
 
     def findScalaPlugin: Option[Plugin] = {
       plugins.find { plugin =>
-        scalaPluginOrgs.contains(plugin.getGroupId) && plugin.getArtifactId == "scala-maven-plugin"
+        scalaPluginOrgs.contains(
+          plugin.getGroupId
+        ) && plugin.getArtifactId == "scala-maven-plugin"
       }
     }
   }
