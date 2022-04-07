@@ -53,7 +53,7 @@
         <maven-plugin-api.version>3.8.4</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.6.2</maven-plugin-plugin.version>
-        <scalafix.version>0.9.34</scalafix.version>
+        <scalafix.version>0.10.0</scalafix.version>
         <scala.major.version>2.13</scala.major.version>
         <scala.patch.version>8</scala.patch.version>
         <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
