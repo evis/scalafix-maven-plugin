@@ -11,7 +11,7 @@ Add plugin into `plugins` node of `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.7_0.10.0</version>
+        <version>0.1.7_0.10.1</version>
     </plugin>
 </plugins>
 ```
@@ -58,7 +58,7 @@ By default, sources should be located inside `src/main/scala` directory. Though,
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
-    <version>0.1.7_0.10.0</version>
+    <version>0.1.7_0.10.1</version>
     <configuration>
         <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
     </configuration>
@@ -96,7 +96,7 @@ Also, you can pass parameters via `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.7_0.10.0</version>
+        <version>0.1.7_0.10.1</version>
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
@@ -111,7 +111,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
-    <version>0.1.7_0.10.0</version>
+    <version>0.1.7_0.10.1</version>
     <dependencies>
         <dependency>
             <groupId>com.nequissimus</groupId>
