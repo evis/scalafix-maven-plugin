@@ -256,7 +256,13 @@
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_${scala.major.version}</artifactId>
+            <artifactId>scalatest-flatspec_${scala.major.version}</artifactId>
+            <version>${scalatest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest-shouldmatchers_${scala.major.version}</artifactId>
             <version>${scalatest.version}</version>
             <scope>test</scope>
         </dependency>
