@@ -35,7 +35,7 @@
             <id>scala-2.12</id>
             <properties>
                 <scala.major.version>2.12</scala.major.version>
-                <scala.patch.version>16</scala.patch.version>
+                <scala.patch.version>17</scala.patch.version>
             </properties>
         </profile>
         <profile>
