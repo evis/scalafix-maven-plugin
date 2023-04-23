@@ -193,6 +193,17 @@ mvn clean compile scalafix:scalafix # this invocation uses .scalafix.conf
 mvn test-compile scalafix:scalafix -Dscalafix.config=.scalafix.test.conf # means that rules for test code are located in file .scalafix.test.conf
 ```
 
+7. If you need to run a rule from Github, add it to the list of rules inside `.scalafix.conf`:
+```hocon
+rules = [
+  "github:zio/zio/Zio2Upgrade?sha=series/2.x"
+]
+```
+
+And then just run `mvn scalafix:scalafix`.
+
+This is equivalent to `sbt "scalafixEnable; scalafixAll github:zio/zio/Zio2Upgrade?sha=series/2.x"`.
+
 ## Contributing
 Pull requests are welcome. For major changes, please [open an issue](https://github.com/evis/scalafix-maven-plugin/issues/new) first to discuss what you would like to change.
 If you need some help with your PR at any time, please feel free to mention [`@evis`](https://github.com/evis).
