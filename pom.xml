@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <maven-core.version>3.9.2</maven-core.version>
-        <maven-plugin-api.version>3.9.1</maven-plugin-api.version>
+        <maven-plugin-api.version>3.9.2</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.8.2</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.8.2</maven-plugin-plugin.version>
         <scalafix.version>0.10.4</scalafix.version>
