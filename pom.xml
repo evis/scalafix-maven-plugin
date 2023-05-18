@@ -52,7 +52,7 @@
         <maven-core.version>3.9.2</maven-core.version>
         <maven-plugin-api.version>3.9.2</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.9.0</maven-plugin-annotations.version>
-        <maven-plugin-plugin.version>3.8.2</maven-plugin-plugin.version>
+        <maven-plugin-plugin.version>3.9.0</maven-plugin-plugin.version>
         <scalafix.version>0.10.4</scalafix.version>
         <scala.major.version>2.13</scala.major.version>
         <scala.patch.version>8</scala.patch.version>
