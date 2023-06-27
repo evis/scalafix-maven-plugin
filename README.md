@@ -11,12 +11,12 @@ Add plugin into `plugins` node of `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.8_0.10.4</version>
+        <version>0.1.8_0.11.0</version>
     </plugin>
 </plugins>
 ```
 
-Where `0.1.8` is version of the plugin itself, and `0.10.4` is version of Scalafix invoked by the plugin.
+Where `0.1.8` is version of the plugin itself, and `0.11.0` is version of Scalafix invoked by the plugin.
 
 Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project (note the dot at the start of filename). You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
@@ -58,7 +58,7 @@ By default, sources should be located inside `src/main/scala` directory. Though,
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
-    <version>0.1.8_0.10.4</version>
+    <version>0.1.8_0.11.0</version>
     <configuration>
         <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
     </configuration>
@@ -96,7 +96,7 @@ Also, you can pass parameters via `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.8_0.10.4</version>
+        <version>0.1.8_0.11.0</version>
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
@@ -111,7 +111,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
-    <version>0.1.8_0.10.4</version>
+    <version>0.1.8_0.11.0</version>
     <dependencies>
         <dependency>
             <groupId>com.nequissimus</groupId>
@@ -126,7 +126,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 
 CLI name | Maven configuration name | Maven type | Description
 --- | --- | --- | ---
-`scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` (default: `IN_PLACE`) | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.10.4/scalafix/interfaces/ScalafixMainMode.html).
+`scalafix.mode` | `mode` | `ScalafixMainMode`: either `IN_PLACE`, `CHECK`, `STDOUT` or `AUTO_SUPPRESS_LINTER_ERRORS` (default: `IN_PLACE`) | Describes mode in which Scalafix runs. Description of different parameter values can be found in [Scalafix javadoc](https://static.javadoc.io/ch.epfl.scala/scalafix-interfaces/0.11.0/scalafix/interfaces/ScalafixMainMode.html).
 `scalafix.command.line.args` | `commandLineArgs` | `List[String]` (default: empty) | Custom CLI arguments to pass into Scalafix. Description of available arguments can be found in [Scalafix CLI documentation](https://scalacenter.github.io/scalafix/docs/users/installation.html#help).
 `scalafix.skip` | `skip` | `Boolean` (default: `false`) | Whether we should skip all formatting.
 `scalafix.skip.main` | `skipMain` | `Boolean` (default: `false`) | Whether we should skip formatting of application/library sources (by default located in `main/scala`).
