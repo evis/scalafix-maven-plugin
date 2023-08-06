@@ -204,6 +204,33 @@ And then just run `mvn scalafix:scalafix`.
 
 This is equivalent to `sbt "scalafixEnable; scalafixAll github:zio/zio/Zio2Upgrade?sha=series/2.x"`.
 
+8. To use a third-party rule, you may need to add its dependencies if the compiler complains about missing classes or methods. For example, scala-rewrites requires scalafix-core and typelevel-scalafix:
+
+```xml
+<plugin>
+    <groupId>io.github.evis</groupId>
+    <artifactId>scalafix-maven-plugin_${scala.version.short}</artifactId>
+    <version>0.1.8_${scalafix.version}</version>
+    <dependencies>
+        <dependency>
+            <groupId>ch.epfl.scala</groupId>
+            <artifactId>scalafix-core_${scala.version.short}</artifactId>
+            <version>${scalafix.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-rewrites_${scala.version.short}</artifactId>
+            <version>0.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.typelevel</groupId>
+            <artifactId>typelevel-scalafix_${scala.version.short}</artifactId>
+            <version>0.1.4</version>
+        </dependency>
+    </dependencies>
+</plugin>
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please [open an issue](https://github.com/evis/scalafix-maven-plugin/issues/new) first to discuss what you would like to change.
 If you need some help with your PR at any time, please feel free to mention [`@evis`](https://github.com/evis).
