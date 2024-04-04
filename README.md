@@ -52,7 +52,16 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
 
 You don't need to care about passing Scala version and Scalac options to this plugin specifically. Plugin finds them automatically from your build info.
 
-By default, sources should be located inside `src/main/scala` directory. Though, you may change it using `sourceDirectory` configuration option, e.g.:
+By default, sources should be located inside `src/main/scala` directory. Though, you may change it using `sourceDirectory` build option, plugin respects this, e.g.:
+
+```xml
+<build>
+    <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
+    <!-- another build settings... -->
+</build>
+```
+
+Or using `mainSourceDirectories` configuration option of the plugin, e.g.:
 
 ```xml
 <plugin>
@@ -60,7 +69,11 @@ By default, sources should be located inside `src/main/scala` directory. Though,
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
     <version>0.1.8_0.11.0</version>
     <configuration>
-        <sourceDirectory>src/main/my-sources-dir</sourceDirectory>
+        <mainSourceDirectories>
+            <directory>src/main/my-sources-dir</directory>
+            <directory>src/main/my-another-dir</directory>
+            <!-- and so on, you can list several directories here... -->
+        </mainSourceDirectories>
     </configuration>
 </plugin>
 ```
