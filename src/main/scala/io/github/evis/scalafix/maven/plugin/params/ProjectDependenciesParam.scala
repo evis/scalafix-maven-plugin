@@ -21,6 +21,7 @@ object ProjectDependenciesParam {
       case (Some(scala3), Some(_)) =>
         log.warn(
           s"both scala3-library_3 and scala-library are present in classpath, set Scala version = ${scala3.getVersion}")
+      case _ =>
     }
     _.withClasspath(deps.flatMap { dep =>
       /* Some dependencies could be POM files, which scalameta's ClassPathIndex
