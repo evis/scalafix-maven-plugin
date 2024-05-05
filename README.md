@@ -20,7 +20,14 @@ Where `0.1.9` is version of the plugin itself, and `0.12.1` is version of Scalaf
 
 Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project (note the dot at the start of filename). You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
-In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable SemanticDB compiler plugin too:
+You don't need to care about passing Scala version and Scalac options to this plugin specifically. Plugin finds them automatically from your build info.
+
+### Semantic rules with SemanticDB
+
+In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable SemanticDB.
+
+<details>
+<summary>For Scala 2, you should add compiler plugin.</summary>
 
 ```xml
 <plugin>
@@ -49,8 +56,35 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
     </configuration>
 </plugin>
 ```
+</details>
 
-You don't need to care about passing Scala version and Scalac options to this plugin specifically. Plugin finds them automatically from your build info.
+<details>
+<summary>For Scala 3, you just need to enable it with compiler flag.</summary>
+
+```xml
+<plugin>
+    <groupId>net.alchim31.maven</groupId>
+    <artifactId>scala-maven-plugin_${scala.binary.version}</artifactId>
+    <version>${scala-maven-plugin.version}</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <args>
+            <arg>-Ywarn-unused</arg> <!-- if you need exactly RemoveUnused -->
+            <arg>-Ysemanticdb</arg>
+        </args>
+    </configuration>
+</plugin>
+```
+</details>
+
+### Overriding sources location
 
 By default, sources should be located inside `src/main/scala` directory. Though, you may change it using `sourceDirectory` build option, plugin respects this, e.g.:
 
