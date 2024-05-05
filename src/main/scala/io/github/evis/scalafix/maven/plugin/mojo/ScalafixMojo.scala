@@ -70,7 +70,7 @@ final class ScalafixMojo extends AbstractMojo {
       val params =
         List(
           getSourceParam,
-          ProjectDependenciesParam(project.getArtifacts.asScala),
+          ProjectDependenciesParam(project.getArtifacts.asScala, getLog),
           CompiledDirectoryParam(mainOutputs ++ testOutputs),
           PluginsParam(bld.getPlugins.asScala),
           ModeParam(mode),
