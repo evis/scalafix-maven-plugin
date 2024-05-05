@@ -18,6 +18,11 @@ Add plugin into `plugins` node of `pom.xml`:
 
 Where `0.1.9` is version of the plugin itself, and `0.12.1` is version of Scalafix invoked by the plugin.
 
+Notes about Scala versions:
+1. It should be OK to use scalafix-maven-plugin_2.13 for Scala 3. Though, if you encounter any problems with such usage, create an issue.
+2. Use scalafix-maven-plugin_2.12 for Scala 2.12, if you need semantic rules.
+3. Scala 2.11 and older aren't supported.
+
 Then, you need to setup a file `.scalafix.conf` in the root directory of your Maven project (note the dot at the start of filename). You can find `.scalafix.conf` guide [here](https://scalacenter.github.io/scalafix/docs/users/configuration.html).
 
 You don't need to care about passing Scala version and Scalac options to this plugin specifically. Plugin finds them automatically from your build info.
