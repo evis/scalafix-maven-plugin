@@ -49,7 +49,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven-core.version>3.9.7</maven-core.version>
+        <maven-core.version>3.9.8</maven-core.version>
         <maven-plugin-api.version>3.9.7</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.13.1</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.13.1</maven-plugin-plugin.version>
