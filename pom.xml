@@ -35,14 +35,14 @@
             <id>scala-2.12</id>
             <properties>
                 <scala.major.version>2.12</scala.major.version>
-                <scala.patch.version>19</scala.patch.version>
+                <scala.patch.version>20</scala.patch.version>
             </properties>
         </profile>
         <profile>
             <id>scala-2.13</id>
             <properties>
                 <scala.major.version>2.13</scala.major.version>
-                <scala.patch.version>14</scala.patch.version>
+                <scala.patch.version>16</scala.patch.version>
             </properties>
         </profile>
     </profiles>
@@ -53,7 +53,7 @@
         <maven-plugin-api.version>3.9.9</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.15.1</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.15.1</maven-plugin-plugin.version>
-        <scalafix.version>0.12.1</scalafix.version>
+        <scalafix.version>0.14.2</scalafix.version>
         <scala.major.version>2.13</scala.major.version>
         <scala.patch.version>14</scala.patch.version>
         <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
