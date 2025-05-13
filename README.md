@@ -32,7 +32,7 @@ You don't need to care about passing Scala version and Scalac options to this pl
 In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable SemanticDB.
 
 <details>
-<summary>For Scala 2, you should add compiler plugin.</summary>
+<summary>For Scala 2.13, you should add compiler plugin. For Scala 2.13, just repalce compiler flag from "-Wunused" to "-Ywarn-unused" </summary>
 
 ```xml
 <plugin>
@@ -49,7 +49,7 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
     </executions>
     <configuration>
         <args>
-            <arg>-Ywarn-unused</arg> <!-- if you need exactly RemoveUnused -->
+            <arg>-Wunused</arg> <!-- if you need exactly RemoveUnused -->
         </args>
         <compilerPlugins>
             <compilerPlugin>
@@ -81,7 +81,7 @@ In order to execute semantic rules (e.g., `RemoveUnused`), you need to enable Se
     </executions>
     <configuration>
         <args>
-            <arg>-Ywarn-unused</arg> <!-- if you need exactly RemoveUnused -->
+            <arg>-Wunused:all</arg> <!-- if you need exactly RemoveUnused -->
             <arg>-Ysemanticdb</arg>
         </args>
     </configuration>
