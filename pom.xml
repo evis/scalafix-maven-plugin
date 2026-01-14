@@ -213,6 +213,17 @@
                 <groupId>org.antipathy</groupId>
                 <artifactId>mvn-scalafmt_${scala.major.version}</artifactId>
                 <version>${mvn-scalafmt.version}</version>
+                <configuration>
+                    <validateOnly>true</validateOnly>
+                    <configLocation>.scalafmt.conf</configLocation>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>io.github.evis</groupId>
