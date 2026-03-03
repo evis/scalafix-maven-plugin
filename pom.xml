@@ -35,14 +35,14 @@
             <id>scala-2.12</id>
             <properties>
                 <scala.major.version>2.12</scala.major.version>
-                <scala.patch.version>20</scala.patch.version>
+                <scala.patch.version>21</scala.patch.version>
             </properties>
         </profile>
         <profile>
             <id>scala-2.13</id>
             <properties>
                 <scala.major.version>2.13</scala.major.version>
-                <scala.patch.version>16</scala.patch.version>
+                <scala.patch.version>18</scala.patch.version>
             </properties>
         </profile>
     </profiles>
@@ -53,7 +53,7 @@
         <maven-plugin-api.version>3.9.12</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.15.2</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.15.2</maven-plugin-plugin.version>
-        <scalafix.version>0.14.3</scalafix.version>
+        <scalafix.version>0.14.6</scalafix.version>
         <scala.major.version>2.13</scala.major.version>
         <scala.patch.version>14</scala.patch.version>
         <scala.version>${scala.major.version}.${scala.patch.version}</scala.version>
@@ -69,7 +69,7 @@
         <scalatest.version>3.2.19</scalatest.version>
         <scalatest-maven-plugin.version>2.2.0</scalatest-maven-plugin.version>
         <mvn-scalafmt.version>1.1.1713302731.c3d0074</mvn-scalafmt.version>
-        <semanticdb.version>4.14.1</semanticdb.version>
+        <semanticdb.version>4.15.2</semanticdb.version>
         <scala-cross-maven-plugin.version>0.3.0</scala-cross-maven-plugin.version>
     </properties>
     <packaging>maven-plugin</packaging>
