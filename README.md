@@ -11,12 +11,12 @@ Add plugin into `plugins` node of `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.10_0.14.2</version>
+        <version>0.1.11_0.14.6</version>
     </plugin>
 </plugins>
 ```
 
-Where `0.1.10` is version of the plugin itself, and `0.14.2` is version of Scalafix invoked by the plugin.
+Where `0.1.11` is version of the plugin itself, and `0.14.6` is version of Scalafix invoked by the plugin.
 
 Notes about Scala versions:
 1. It should be OK to use scalafix-maven-plugin_2.13 for Scala 3. Though, if you encounter any problems with such usage, create an issue.
@@ -107,7 +107,7 @@ Or using `mainSourceDirectories` configuration option of the plugin, e.g.:
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
-    <version>0.1.10_0.14.2</version>
+    <version>0.1.11_0.14.6</version>
     <configuration>
         <mainSourceDirectories>
             <directory>src/main/my-sources-dir</directory>
@@ -149,7 +149,7 @@ Also, you can pass parameters via `pom.xml`:
     <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.10_0.14.2</version>
+        <version>0.1.11_0.14.6</version>
         <configuration>
             <mode>CHECK</mode>
             <skipTest>true</skipTest>
@@ -164,7 +164,7 @@ If you want to use external rules, add jars containing rules to dependencies of 
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_2.13</artifactId>
-    <version>0.1.10_0.14.2</version>
+    <version>0.1.11_0.14.6</version>
     <dependencies>
         <dependency>
             <groupId>com.nequissimus</groupId>
@@ -263,7 +263,7 @@ This is equivalent to `sbt "scalafixEnable; scalafixAll github:zio/zio/Zio2Upgra
 <plugin>
     <groupId>io.github.evis</groupId>
     <artifactId>scalafix-maven-plugin_${scala.version.short}</artifactId>
-    <version>0.1.10_${scalafix.version}</version>
+    <version>0.1.11_${scalafix.version}</version>
     <dependencies>
         <dependency>
             <groupId>ch.epfl.scala</groupId>
