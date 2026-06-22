@@ -57,7 +57,8 @@ class TestLog(level: LogLevel) extends Log {
   private def add(
       level: LogLevel,
       s: Option[CharSequence],
-      e: Option[Throwable]): Unit =
+      e: Option[Throwable]
+  ): Unit =
     log = log.enqueue(LogMessage(level, s, e))
 
   private def isEnabled(level: LogLevel) = level >= this.level

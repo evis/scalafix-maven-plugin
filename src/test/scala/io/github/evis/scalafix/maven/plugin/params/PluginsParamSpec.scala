@@ -24,9 +24,8 @@ class PluginsParamSpec extends ParamSpec {
 
   "PluginsParam" should "return scalacOptions if they exist" in {
     PluginsParam(
-      List(scalaPlugin("-Xlint" :: "-Ypartial-unification" :: Nil))).applied.scalacOptions shouldBe List(
-      "-Xlint",
-      "-Ypartial-unification")
+      List(scalaPlugin("-Xlint" :: "-Ypartial-unification" :: Nil))
+    ).applied.scalacOptions shouldBe List("-Xlint", "-Ypartial-unification")
   }
 
   it should "return no scalacOptions if they are not set" in {
