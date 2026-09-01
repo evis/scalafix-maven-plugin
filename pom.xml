@@ -68,7 +68,7 @@
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <scalatest.version>3.2.20</scalatest.version>
         <scalatest-maven-plugin.version>2.2.0</scalatest-maven-plugin.version>
-        <mvn-scalafmt.version>1.1.1783760054.f8e8ca3</mvn-scalafmt.version>
+        <mvn-scalafmt.version>1.1.1788256639.86f52bb</mvn-scalafmt.version>
         <semanticdb.version>4.15.2</semanticdb.version>
         <scala-cross-maven-plugin.version>0.3.0</scala-cross-maven-plugin.version>
     </properties>
