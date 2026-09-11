@@ -8,6 +8,7 @@ class CommandLineArgsParamSpec extends ParamSpec {
     args.add("--verbose")
     CommandLineArgsParam(args).applied.parsedArguments shouldBe List(
       "--syntactic",
-      "--verbose")
+      "--verbose"
+    )
   }
 }

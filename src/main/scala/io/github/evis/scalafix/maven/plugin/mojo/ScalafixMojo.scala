@@ -30,7 +30,8 @@ final class ScalafixMojo extends AbstractMojo {
     property = "project",
     defaultValue = "${project}",
     required = true,
-    readonly = true)
+    readonly = true
+  )
   private var project: MavenProject = _
 
   @Parameter(property = "scalafix.mainSourceDirectories")
@@ -62,7 +63,8 @@ final class ScalafixMojo extends AbstractMojo {
       getLog.info("Skip scalafix since skip flag passed")
     } else if (skipMain && skipTest) {
       getLog.info(
-        "Skip scalafix since both skip.main and skip.test flags passed")
+        "Skip scalafix since both skip.main and skip.test flags passed"
+      )
     } else {
       val bld = project.getBuild
       val mainOutputs = if (skipMain) Nil else List(bld.getOutputDirectory)
@@ -84,14 +86,17 @@ final class ScalafixMojo extends AbstractMojo {
   private def getSourceParam: MojoParam = {
     val lookup = new SourceDirectoryLookup(FileOps, project)
     val main = checkSources("main", skipMain)(
-      lookup.getMain(mainSourceDirectories.asScala))
+      lookup.getMain(mainSourceDirectories.asScala)
+    )
     val test = checkSources("test", skipTest)(
-      lookup.getTest(testSourceDirectories.asScala))
+      lookup.getTest(testSourceDirectories.asScala)
+    )
     SourceDirectoryParam(main ++ test)
   }
 
   private def checkSources(flagName: String, skip: Boolean)(
-      getPaths: => List[Path]): List[Path] = {
+      getPaths: => List[Path]
+  ): List[Path] = {
     val paths = if (skip) Nil else getPaths
     if (paths.isEmpty) getLog.info(s"Skip scalafix[$flagName]")
     else paths.foreach(dir => getLog.info(s"Processing[$flagName]: $dir"))

@@ -9,7 +9,8 @@ trait ShowErrors {
   def showErrors(errors: List[ScalafixError]): Unit = {
     if (errors.nonEmpty) {
       throw new MojoExecutionException(
-        "Scalafix invoked with errors. Check logs for details.")
+        "Scalafix invoked with errors. Check logs for details."
+      )
     }
   }
 }
