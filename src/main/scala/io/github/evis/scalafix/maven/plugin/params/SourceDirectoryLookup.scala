@@ -17,18 +17,21 @@ class SourceDirectoryLookup(fileOps: FileOps, project: MavenProject) {
     getFiles(
       customDirs,
       build.getSourceDirectory(),
-      project.getCompileSourceRoots())
+      project.getCompileSourceRoots()
+    )
 
   def getTest(customDirs: Iterable[File]): List[Path] =
     getFiles(
       customDirs,
       build.getTestSourceDirectory(),
-      project.getTestCompileSourceRoots())
+      project.getTestCompileSourceRoots()
+    )
 
   private def getFiles(
       customDirs: Iterable[File],
       primaryDir: => String,
-      alternativeDirs: => JList[String]): List[Path] = {
+      alternativeDirs: => JList[String]
+  ): List[Path] = {
     val customDirsOpt = Option(customDirs).filter(_.nonEmpty)
     customDirsOpt.fold {
       val builder = Set.newBuilder[Path]
