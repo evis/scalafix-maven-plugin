@@ -20,7 +20,8 @@ class RunSpec extends BaseSpec with Run {
       List(
         SourceDirectoryParam("src/test/resources/project"),
         ConfigParam(
-          new File("src/test/resources/project/.success.scalafix.conf")),
+          new File("src/test/resources/project/.success.scalafix.conf")
+        ),
         ModeParam(CHECK)
       )
     noException should be thrownBy run(params, log)

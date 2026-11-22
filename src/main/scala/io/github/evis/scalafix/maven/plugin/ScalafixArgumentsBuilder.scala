@@ -16,11 +16,11 @@ import scalafix.interfaces.{
 
 import scala.collection.JavaConverters._
 
-/**
-  * It has the same methods as [[ScalafixArguments]], but:
+/** It has the same methods as [[ScalafixArguments]], but:
   *
-  * 1. withXXX methods, which take lists, add to current list. For example:
+  *   1. withXXX methods, which take lists, add to current list. For example:
   *
+  * {{{
   * scalafix
   *   .newArguments()
   *   .withScalacOptions(singletonList("1"))
@@ -30,11 +30,13 @@ import scala.collection.JavaConverters._
   *   .withScalacOptions(List("1"))
   *   .withScalacOptions(List("2"))
   *   .build(scalafix) // contains both 1 and 2
+  * }}}
   *
-  * Why: because several mojo params may add elements to the same argument field,
-  * e.g., [[CompiledDirectoryParam]] and [[ProjectDependenciesParam]]
+  * Why: because several mojo params may add elements to the same argument
+  * field, e.g., [[CompiledDirectoryParam]] and [[ProjectDependenciesParam]]
   *
-  * 2. All withXXX methods take Scala Lists/Options instead of Java for convenience.
+  * 2. All withXXX methods take Scala Lists/Options instead of Java for
+  * convenience.
   */
 final case class ScalafixArgumentsBuilder(
     rules: List[String] = Nil,
@@ -80,14 +82,16 @@ final case class ScalafixArgumentsBuilder(
     copy(rules = this.rules ::: rules)
 
   def withToolClasspath(
-      toolClasspath: URLClassLoader): ScalafixArgumentsBuilder =
+      toolClasspath: URLClassLoader
+  ): ScalafixArgumentsBuilder =
     copy(toolClasspath = Some(toolClasspath))
 
   def withPaths(paths: List[Path]): ScalafixArgumentsBuilder =
     copy(paths = this.paths ::: paths)
 
   def withExcludedPaths(
-      excludedPaths: List[PathMatcher]): ScalafixArgumentsBuilder =
+      excludedPaths: List[PathMatcher]
+  ): ScalafixArgumentsBuilder =
     copy(excludedPaths = this.excludedPaths ::: excludedPaths)
 
   def withConfig(config: Path): ScalafixArgumentsBuilder =
@@ -97,7 +101,8 @@ final case class ScalafixArgumentsBuilder(
     copy(mode = Some(mode))
 
   def withParsedArguments(
-      parsedArguments: List[String]): ScalafixArgumentsBuilder =
+      parsedArguments: List[String]
+  ): ScalafixArgumentsBuilder =
     copy(parsedArguments = this.parsedArguments ::: parsedArguments)
 
   def withPrintStream(printStream: PrintStream): ScalafixArgumentsBuilder =
@@ -110,7 +115,8 @@ final case class ScalafixArgumentsBuilder(
     copy(sourceroot = Some(sourceroot))
 
   def withMainCallback(
-      mainCallback: ScalafixMainCallback): ScalafixArgumentsBuilder =
+      mainCallback: ScalafixMainCallback
+  ): ScalafixArgumentsBuilder =
     copy(mainCallback = Some(mainCallback))
 
   def withCharset(charset: Charset): ScalafixArgumentsBuilder =
@@ -132,11 +138,13 @@ object ScalafixArgumentsBuilder {
       extends AnyVal {
 
     def withToolClasspath(
-        toolClasspath: Option[URLClassLoader]): ScalafixArguments =
+        toolClasspath: Option[URLClassLoader]
+    ): ScalafixArguments =
       withOpt(toolClasspath)(_.withToolClasspath)
 
     def withWorkingDirectory(
-        workingDirectory: Option[Path]): ScalafixArguments =
+        workingDirectory: Option[Path]
+    ): ScalafixArguments =
       withOpt(workingDirectory)(_.withWorkingDirectory)
 
     def withMode(mode: Option[ScalafixMainMode]): ScalafixArguments =
@@ -149,7 +157,8 @@ object ScalafixArgumentsBuilder {
       withOpt(sourceroot)(_.withSourceroot)
 
     def withMainCallback(
-        mainCallback: Option[ScalafixMainCallback]): ScalafixArguments =
+        mainCallback: Option[ScalafixMainCallback]
+    ): ScalafixArguments =
       withOpt(mainCallback)(_.withMainCallback)
 
     def withCharset(charset: Option[Charset]): ScalafixArguments =
@@ -159,7 +168,8 @@ object ScalafixArgumentsBuilder {
       withOpt(scalaVersion)(_.withScalaVersion)
 
     private def withOpt[A](value: Option[A])(
-        f: ScalafixArguments => A => ScalafixArguments): ScalafixArguments =
+        f: ScalafixArguments => A => ScalafixArguments
+    ): ScalafixArguments =
       value.fold(arguments)(f(arguments))
   }
 }
